@@ -22,8 +22,9 @@
 #define I2C_ADDR 0x74            // I2C address of Charlieplex matrix
 
 uint8_t page = 0;                         // Front/back buffer control
+char animation = 0;
 uint8_t *ptr  = animationNormal;          // Current pointer into normal animation data
-uint8_t *ptrFlicker  = animationFlicker;  // Current pointer into normal animation data
+// uint8_t *ptrFlicker  = animationFlicker;  // Current pointer into normal animation data
 uint8_t img[9 * 16];                      // Buffer for rendering image
 
 
@@ -113,9 +114,9 @@ void setup() {
 }
 
 void loop() {
-  // *************************************************************
-  // ************* Ultrasonic Distance Sensor *****************
-  // *************************************************************
+  // ==========================================================
+  // ============== Ultrasonic Distance Sensor ================
+  // ==========================================================
   // Write a pulse to the HC-SR04 Trigger Pin
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
@@ -129,17 +130,20 @@ void loop() {
   // Determine distance from duration
   // Use 343 metres per second as speed of sound
   distance = (duration / 2) * 0.0343;
-  // *************************************************************
+  // ==========================================================
   
   // If distance is equal to or less than 30 cm show animationFlicker
   if (distance <= 30) {
-
-    digitalWrite(LED_BUILTIN, HIGH);    // Tiny red LED on for testing
+      digitalWrite(LED_BUILTIN, HIGH);    // Tiny red LED on for testing
+   
+   if (animation == 0) {
+      animation = 1;
+      ptr = animationFlicker;
+   }
+   
     uint8_t  a, x1, y1, x2, y2, x, y;
     
     
-    if ()   
-
     power_twi_enable();
     // Datasheet recommends that I2C should be re-initialized after enable,
     // but Wire.begin() is slow.  Seems to work OK without.
@@ -154,21 +158,26 @@ void loop() {
     page ^= 1; // Flip front/back buffer index
 
     // Then render NEXT frame.  Start by getting bounding rect for new frame:
-    a = pgm_read_byte(ptrFlicker++);     // New frame X1/Y1
+    a = pgm_read_byte(ptr++);     // New frame X1/Y1
+    // a = pgm_read_byte(ptrFlicker++);     // New frame X1/Y1
 
     if(a >= 0x90) {               // End of Data(EOD) marker? (valid X1 never exceeds 8)
-      ptrFlicker = animationFlicker;     // Reset animation data pointer to start
-      a   = pgm_read_byte(ptrFlicker++); // and take first value
+      ptr = animationFlicker;     // Reset animation data pointer to start
+      // ptrFlicker = animationFlicker;     // Reset animation data pointer to start
+      a   = pgm_read_byte(ptr++); // and take first value
+      // a   = pgm_read_byte(ptrFlicker++); // and take first value
     }
     x1 = a >> 4;                  // X1 = high 4 bits
     y1 = a & 0x0F;                // Y1 = low 4 bits
-    a  = pgm_read_byte(ptrFlicker++);    // New frame X2/Y2
+    a  = pgm_read_byte(ptr++);    // New frame X2/Y2
+    // a  = pgm_read_byte(ptrFlicker++);    // New frame X2/Y2
     x2 = a >> 4;                  // X2 = high 4 bits
     y2 = a & 0x0F;                // Y2 = low 4 bits
 
     // Read rectangle of data from anim[] into portion of img[] buffer
     for(x=x1; x<=x2; x++) { // Column-major
-      for(y=y1; y<=y2; y++) img[(x << 4) + y] = pgm_read_byte(ptrFlicker++);
+      // for(y=y1; y<=y2; y++) img[(x << 4) + y] = pgm_read_byte(ptrFlicker++);
+      for(y=y1; y<=y2; y++) img[(x << 4) + y] = pgm_read_byte(ptr++);
     }
 
     // Write img[] to matrix (not actually displayed until next pass)
@@ -184,6 +193,7 @@ void loop() {
         }
       }
     }
+    delayMicroseconds(5000);
     Wire.endTransmission();
 
     power_twi_disable(); // I2C off (see comment at top of function)
@@ -196,7 +206,8 @@ void loop() {
 
   // If distance is more than 30 cm show aranimationNormal
  } else { 
-   digitalWrite(LED_BUILTIN, LOW);   // Tiny red LED off for testing
+    digitalWrite(LED_BUILTIN, LOW);   // Tiny red LED off for testing
+    animation = 0;
     uint8_t  a, x1, y1, x2, y2, x, y;
 
     power_twi_enable();
