@@ -1,4 +1,4 @@
-# led-candle
+# LED candle
 An arduino led candle that flickers when someone goes near it. This project is adapted from Phillip Burgess/paintyourdragon's Animated Flame Pendant:
 https://learn.adafruit.com/animated-flame-pendant
 
