@@ -16,7 +16,7 @@ https://learn.adafruit.com/animated-flame-pendant
 TODO
 
 
-## Generating Animations
+## Generating Your Own Animations
 1) take a video with you phone then airdrop to your computer
 2) edit video a bit (make greyscale, crop)
 4) export the two source videos you'd like to turn into animations (low resolution, low settings)
