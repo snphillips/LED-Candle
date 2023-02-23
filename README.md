@@ -25,9 +25,11 @@ TODO
 7) using the `ffmpeg` library convert video to pngs (30 frames/second)
 ```
 ffmpeg -i flame-normal.mp4 -r 30/1 $flamenormal%03d.png
+```
+```
 ffmpeg -i flame-flicker.mp4 -r 30/1 $flameflicker%03d.png
 ```
-7) resize photos to 9x16 using ffmpeg or this online tool: https://bulkresizephotos.com/
+8) resize photos to 9x16 using ffmpeg (TODO: insert ffmpeg instructions) or this online tool: https://bulkresizephotos.com/
 
 
 ## Hardware
