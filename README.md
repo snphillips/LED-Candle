@@ -20,10 +20,12 @@ TODO
 1) take a video with you phone then airdrop to your computer
 2) edit video a bit (make greyscale, crop)
 4) export the two source videos you'd like to turn into animations (low resolution, low settings)
-5) rotate the videos in the finder so they're vertical
-6) using the `ffmpeg` library convert video to pngs (30 frames/second)
+5) name the normal flame video `flame-normal`, and name the flicker flame video `flame-flicker`
+6) rotate the videos in the finder so they're vertical
+7) using the `ffmpeg` library convert video to pngs (30 frames/second)
 ```
-ffmpeg -i flame-flicker.mp4 -r 30/1 $filename%03d.png
+ffmpeg -i flame-normal.mp4 -r 30/1 $flamenormal%03d.png
+ffmpeg -i flame-flicker.mp4 -r 30/1 $flameflicker%03d.png
 ```
 7) resize photos to 9x16 using ffmpeg or this online tool: https://bulkresizephotos.com/
 
