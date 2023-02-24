@@ -14,17 +14,16 @@
 //--------------------------------------------------------------------------
 
 #include <Wire.h>                // Library for I2C communication
-#include "data-normal-flame.h"   // Flame animation-normal data
-#include "data-flicker-flame.h"  // Flame animation-flicker data
+#include "data-flame-normal.h"   // Flame animation-normal data
+#include "data-flame-flicker.h"  // Flame animation-flicker data
 #include <avr/power.h>           // Peripheral control and
 #include <avr/sleep.h>           // sleep to minimize current draw
 
 #define I2C_ADDR 0x74            // I2C address of Charlieplex matrix
 
 uint8_t page = 0;                         // Front/back buffer control
-char animation = 0;
+char animation = 0;                       // We're only using this as indicator. 0 means normal, 1 means flicker
 uint8_t *ptr  = animationNormal;          // Current pointer into normal animation data
-// uint8_t *ptrFlicker  = animationFlicker;  // Current pointer into normal animation data
 uint8_t img[9 * 16];                      // Buffer for rendering image
 
 
@@ -163,20 +162,16 @@ void loop() {
 
     if(a >= 0x90) {               // End of Data(EOD) marker? (valid X1 never exceeds 8)
       ptr = animationFlicker;     // Reset animation data pointer to start
-      // ptrFlicker = animationFlicker;     // Reset animation data pointer to start
       a   = pgm_read_byte(ptr++); // and take first value
-      // a   = pgm_read_byte(ptrFlicker++); // and take first value
     }
     x1 = a >> 4;                  // X1 = high 4 bits
     y1 = a & 0x0F;                // Y1 = low 4 bits
     a  = pgm_read_byte(ptr++);    // New frame X2/Y2
-    // a  = pgm_read_byte(ptrFlicker++);    // New frame X2/Y2
     x2 = a >> 4;                  // X2 = high 4 bits
     y2 = a & 0x0F;                // Y2 = low 4 bits
 
     // Read rectangle of data from anim[] into portion of img[] buffer
     for(x=x1; x<=x2; x++) { // Column-major
-      // for(y=y1; y<=y2; y++) img[(x << 4) + y] = pgm_read_byte(ptrFlicker++);
       for(y=y1; y<=y2; y++) img[(x << 4) + y] = pgm_read_byte(ptr++);
     }
 
