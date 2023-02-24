@@ -20,7 +20,7 @@ Clone this repo
 `git clone https://github.com/snphillips/led-candle.git`
 
 
-## Generating Your Own Animations
+## Generate Your Own Animations
 This project requires two short animations. If you don't like mine you can make your own.
 1) Take a verticle video with you phone then airdrop to your computer.
 2) Edit the video to your liking. Remove sound track, make greyscale, crop it,
