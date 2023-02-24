@@ -37,7 +37,7 @@ prior    = None
 bytes    = 0
 numBytes = 0xFFFF
 
-sys.stdout.write("const uint8_t PROGMEM animation[] = {")
+sys.stdout.write("const uint8_t PROGMEM animationFlicker[] = {")
 
 for name in sys.argv[1:]: # For each image passed to script...
 	image = Image.open(name)
