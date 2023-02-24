@@ -13,8 +13,11 @@ https://learn.adafruit.com/animated-flame-pendant
 - Ultrasonic Distance Sensor (Adafruit product id: 4007)
 
 
-## Getting Started
-TODO: write this section
+## How to Use
+Note: you'll need python installed on your computer. Learn more here: https://www.python.org/about/gettingstarted/
+
+Clone this repo
+`git clone https://github.com/snphillips/led-candle.git`
 
 
 ## Generating Your Own Animations
