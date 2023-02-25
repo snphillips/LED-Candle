@@ -27,10 +27,10 @@ This project requires two short animations. If you don't like mine you can make 
 1) Take a verticle video with you phone then airdrop to your computer.
 2) Edit the video to your liking. Remove sound track, make greyscale, crop it. Keep in mind you have limited space on the small Pro Trinket. Your final animations can't be longer than about 15 seconds total.
 3) Export the two source videos you'd like to turn into animations. Use a low resolution as you'll eventually be resizing each frame to 9px x 16px.
-4) Place each video in their own folders named flame-normal and flame-flicker
+4) Place each video in their own folders named **flame-normal-source-mp4** and **flame-flicker-source-mp4**
 5) Name the normal flame video `flame-normal.mp4`, and name the flicker flame video `flame-flicker.mp4`
 6) Rotate the videos in the finder so they're vertical
-7) Navigate into the flame-normal folder. Using the `ffmpeg` library convert video to pngs (30 frames/second)
+7) Navigate into the **flame-normal-source-mp4** folder. Using the `ffmpeg` library convert video to pngs (30 frames/second)
 
 ```
 ffmpeg -i flame-normal.mp4 -r 30/1 $flame-normal%03d.png
