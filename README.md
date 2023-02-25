@@ -15,6 +15,7 @@ https://learn.adafruit.com/animated-flame-pendant.
 
 ## Prerequisites
 - Read through Phillip Burgess' Animated Flame Pendant docs: https://learn.adafruit.com/animated-flame-pendant
+- Read through the Ultrasonic Distance Sensor docs: https://learn.adafruit.com/ultrasonic-sonar-distance-sensors
 - Have the Arduino IDE installed on your computer
 - Have the parts listed in the Parts section, plus wire, solder, flux & soldering iron
 - If you want to generate your own animations, have Python & FFmpeg installed on your computer (the leading multimedia framework): https://ffmpeg.org/
