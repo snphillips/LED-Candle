@@ -13,6 +13,14 @@ https://learn.adafruit.com/animated-flame-pendant.
 - Ultrasonic Distance Sensor (Adafruit product id: 4007)
 
 
+## Prerequisites
+- Read through Phillip Burgess' Animated Flame Pendant docs: https://learn.adafruit.com/animated-flame-pendant
+- Have python installed on your computer
+- Have the Arduino IDE installed on your computer
+- Have the parts listed in the Parts section, plus wire, solder, flux & soldering iron
+- If you want to generate your own animations, install FFmpeg (the leading multimedia framework): https://ffmpeg.org/
+
+
 ## How to Use
 Note: you'll need python installed on your computer. Learn more here: https://www.python.org/about/gettingstarted/
 
