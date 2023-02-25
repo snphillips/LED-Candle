@@ -15,14 +15,12 @@ https://learn.adafruit.com/animated-flame-pendant.
 
 ## Prerequisites
 - Read through Phillip Burgess' Animated Flame Pendant docs: https://learn.adafruit.com/animated-flame-pendant
-- Have python installed on your computer
 - Have the Arduino IDE installed on your computer
 - Have the parts listed in the Parts section, plus wire, solder, flux & soldering iron
-- If you want to generate your own animations, install FFmpeg (the leading multimedia framework): https://ffmpeg.org/
+- If you want to generate your own animations, have Python & FFmpeg installed on your computer (the leading multimedia framework): https://ffmpeg.org/
 
 
 ## How to Use
-Note: you'll need python installed on your computer. Learn more here: https://www.python.org/about/gettingstarted/
 
 Clone this repo
 `git clone https://github.com/snphillips/led-candle.git`
@@ -32,8 +30,10 @@ Clone this repo
 
 ## Generate Your Own Animations
 This project requires two short animations. If you don't like mine you can make your own.
+_You'll need python installed on your computer. Learn more here: https://www.python.org/about/gettingstarted/_
+_You'll need FFmeg installed on your computer. Learn more here: https://ffmpeg.org/_
 1) Take a verticle video with you phone then airdrop to your computer.
-2) Edit the video to your liking. Remove sound track, make greyscale, crop it. Keep in mind you have limited space on the small Pro Trinket. Your final animations can't be longer than about 15 seconds total.
+2) Edit the video to your liking. Remove sound track, make greyscale, crop it. Keep in mind we have limited space on the small Pro Trinket. Your final animations can't be longer than about 15 seconds total.
 3) Export the two source videos you'd like to turn into animations. Use a low resolution as you'll eventually be resizing each frame to 9px x 16px.
 4) Place each video in their own folders named **flame-normal-source-mp4** and **flame-flicker-source-mp4**
 5) Name the normal flame video `flame-normal.mp4`, and name the flicker flame video `flame-flicker.mp4`
