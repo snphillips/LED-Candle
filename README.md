@@ -21,13 +21,12 @@ https://learn.adafruit.com/animated-flame-pendant.
 - If you want to generate your own animations, have Python & FFmpeg installed on your computer (the leading multimedia framework): https://ffmpeg.org/
 
 
-## How to Use
+## How to Install Software
 
 Clone this repo
 `git clone https://github.com/snphillips/led-candle.git`
 
-
-
+TODO: fill out this section
 
 ## Generate Your Own Animations
 This project requires two short animations. If you don't like mine you can make your own.
