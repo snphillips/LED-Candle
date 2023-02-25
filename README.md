@@ -30,8 +30,7 @@ TODO: fill out this section
 
 ## Generate Your Own Animations
 This project requires two short animations. If you don't like mine you can make your own.
-_You'll need python installed on your computer. Learn more here: https://www.python.org/about/gettingstarted/_
-_You'll need FFmeg installed on your computer. Learn more here: https://ffmpeg.org/_
+_You'll need python(https://www.python.org/about/gettingstarted/) & FFmeg(https://ffmpeg.org/) installed on your computer._
 1) Take a verticle video with you phone then airdrop to your computer.
 2) Edit the video to your liking. Remove sound track, make greyscale, crop it. Keep in mind we have limited space on the small Pro Trinket. Your final animations can't be longer than about 15 seconds total.
 3) Export the two source videos you'd like to turn into animations. Use a low resolution as you'll eventually be resizing each frame to 9px x 16px.
