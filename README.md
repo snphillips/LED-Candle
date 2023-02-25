@@ -40,13 +40,13 @@ _You'll need python(https://www.python.org/about/gettingstarted/) & FFmeg(https:
 7) Navigate into the **flame-normal-source-mp4** folder. Using the `ffmpeg` library convert video to pngs (30 frames/second)
 
 ```
-ffmpeg -i flame-normal.mp4 -r 30/1 $flame-normal%03d.png
+ffmpeg -i flame-normal-source.mp4 -r 30/1 $flame-normal%03d.png
 ```
 
 8) Navigate into the flame-flicker folder. Using the `ffmpeg` library convert video to pngs (30 frames/second)
 
 ```
-ffmpeg -i flame-flicker.mp4 -r 30/1 $flame-flicker%03d.png
+ffmpeg -i flame-flicker-source.mp4 -r 30/1 $flame-flicker%03d.png
 ```
 
 9) Our LED matrix is only 9 pixels by 16 pixels so we need to resize the images to by tiny 9x16 using ffmpeg (TODO: insert ffmpeg instructions) or this online tool: https://bulkresizephotos.com/.
