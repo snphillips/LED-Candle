@@ -13,6 +13,7 @@ An arduino led candle that flickers when something goes near it. This project is
 ## How to Install Software
 
 Clone this repo
+
 `git clone https://github.com/snphillips/led-candle.git`
 
 TODO: fill out this section
