@@ -3,16 +3,6 @@ An arduino led candle that flickers when something goes near it. This project is
 https://learn.adafruit.com/animated-flame-pendant.
 
 
-## Parts
-- Pro Trinket microcontroller (adafruit.com/product/2010 or 2000) (#2010 = 3V/12MHz for longest battery life, but 5V/16MHz works OK)
-- Charlieplex LED Matrix Driver (Adafruit product id: 2946)
-- Charlieplex LED Matrix (Adafruit product id: 2947, 2948, 2972, 2973 or 2974)
-- 350 mAh LiPoly battery (Adafruit product id: 2750)
-- LiPoly backpack (Adafruit product id: 2124)
-- SPDT Slide Switch (Adafruit product id: 805)
-- Ultrasonic Distance Sensor (Adafruit product id: 4007)
-
-
 ## Prerequisites
 - Read through Phillip Burgess' Animated Flame Pendant docs: https://learn.adafruit.com/animated-flame-pendant
 - Read through the Ultrasonic Distance Sensor docs: https://learn.adafruit.com/ultrasonic-sonar-distance-sensors
@@ -67,6 +57,15 @@ python3 convert-flame-flicker.py *.png > data-flame-flicker.h
 14) Confirm that the project folder contains the three files needed to upload to the Adafruit Pro Trinket: `led-candle.ino`, `data-flame-normal.h`, `data-flame-flicker.h`.
 
 
+## Parts
+- Pro Trinket microcontroller (adafruit.com/product/2010 or 2000) (#2010 = 3V/12MHz for longest battery life, but 5V/16MHz works OK)
+- Charlieplex LED Matrix Driver (Adafruit product id: 2946)
+- Charlieplex LED Matrix (Adafruit product id: 2947, 2948, 2972, 2973 or 2974)
+- 350 mAh LiPoly battery (Adafruit product id: 2750)
+- LiPoly backpack (Adafruit product id: 2124)
+- SPDT Slide Switch (Adafruit product id: 805)
+- Ultrasonic Distance Sensor (Adafruit product id: 4007)
 
-## Hardware
-TODO: write this section
+ 
+- ## Hardware
+The big picutre is to follow the directions detailed in Phillip Burgess' Animated Flame Pendant docs, minus the section about 3D printing. Then, add in the ultrasonic distance sensor. TODO: flush out this section further
