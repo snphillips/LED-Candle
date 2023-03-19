@@ -12,11 +12,16 @@ An arduino led candle that flickers when something goes near it. This project is
 
 ## How to Install Software
 
-Clone this repo
+First, install the [Arduino IDE](https://www.arduino.cc/en/software).
+
+Clone this repo:
 
 `git clone https://github.com/snphillips/led-candle.git`
 
-TODO: fill out this section
+Using the Arduino IDE, open led-candle.ino.
+
+Upload `led-candle.ino` to the Pro Trinket board.
+
 
 ## Generate Your Own Animations
 This project requires two short animations. If you don't like mine you can make your own.
