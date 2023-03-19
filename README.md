@@ -77,7 +77,7 @@ cd flame-flicker-source-pngs
 python3 convert-flame-flicker.py *.png > data-flame-flicker.h
 ```
 
-13) Move the two h files `data-flame-normal.h` & `data-flame-flicker.h` into the root of the project folder: led-candle.
+13) Move the two `h` files `data-flame-normal.h` & `data-flame-flicker.h` into the root of the project folder: led-candle.
 14) Confirm that the project folder contains the three files needed to upload to the Adafruit Pro Trinket: `led-candle.ino`, `data-flame-normal.h`, `data-flame-flicker.h`.
 
 
