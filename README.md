@@ -23,7 +23,8 @@ Using the Arduino IDE, open `led-candle.ino`.
 Select the Pro Trinket 5V/16MHz (USB) or Pro Trinket 3V/12MHz (USB) board from the Tools->Board menu.
 Next go into the Tools -> Programmer menu and select the USBtinyISP programmer.
 
-Upload `led-candle.ino` to the Pro Trinket board by pressing the tiny button on the Pro Trinket. Within eight seconds, select Sketch > Upload Using Programmer. If your code uploaded successfully, at the end of the message in the output you'll see a message like this:
+Upload `led-candle.ino` to the Pro Trinket board by pressing the tiny button on the Pro Trinket. Within eight seconds, select Sketch > Upload Using Programmer. Wait until you see the message "Done uploading". 
+If your code uploaded successfully, at the end of the message in the output you'll see a message like this:
 
 `Sketch uses 21632 bytes (75%) of program storage space. Maximum is 28672 bytes.
 Global variables use 506 bytes of dynamic memory.`
