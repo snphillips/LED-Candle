@@ -42,11 +42,17 @@ _You'll need [python](https://www.python.org/about/gettingstarted/) & [FFmeg](ht
 7) Navigate into the **flame-normal-source-mp4** folder. Using the `ffmpeg` library convert video to pngs (30 frames/second)
 
 ```
+cd flame-normal-source-mp4
+```
+```
 ffmpeg -i flame-normal-source.mp4 -r 30/1 $flamenormal%03d.png
 ```
 
 8) Navigate into the flame-flicker folder. Using the `ffmpeg` library convert video to pngs (30 frames/second)
 
+```
+cd flame-normal-source-mp4
+```
 ```
 ffmpeg -i flame-flicker-source.mp4 -r 30/1 $flameflicker%03d.png
 ```
