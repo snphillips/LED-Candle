@@ -6,7 +6,7 @@ An arduino led candle that flickers when something goes near it. This project is
 - Read through Phillip Burgess' Animated Flame Pendant [Animated Flame Pendant docs](https://learn.adafruit.com/animated-flame-pendant).
 - Read through the [Ultrasonic Distance Sensor docs](https://learn.adafruit.com/ultrasonic-sonar-distance-sensors)
 - Have the [Arduino IDE](https://www.arduino.cc/en/software) installed on your computer
-- Have the parts listed in the Parts section, plus wire, solder, flux & soldering iron
+- Have the parts listed in the Parts section below, plus wire, solder, flux & soldering iron
 - If you want to generate your own animations, have Python & FFmpeg installed on your computer (the leading multimedia framework): https://ffmpeg.org/
 
 
