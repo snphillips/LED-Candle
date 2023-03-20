@@ -52,8 +52,6 @@ _You'll need [python](https://www.python.org/about/gettingstarted/) & [FFmeg](ht
 
 ```
 cd flame-normal-source-mp4
-```
-```
 ffmpeg -i flame-normal-source.mp4 -r 30/1 $flamenormal%03d.png
 ```
 
@@ -62,8 +60,6 @@ ffmpeg -i flame-normal-source.mp4 -r 30/1 $flamenormal%03d.png
 ```
 cd ..
 cd flame-flicker-source-mp4
-```
-```
 ffmpeg -i flame-flicker-source.mp4 -r 30/1 $flameflicker%03d.png
 ```
 
@@ -73,8 +69,6 @@ ffmpeg -i flame-flicker-source.mp4 -r 30/1 $flameflicker%03d.png
 
 ```
 cd flame-normal-source-pngs
-```
-```
 python3 convert-flame-normal.py *.png > data-flame-normal.h
 ```
 
@@ -83,8 +77,6 @@ python3 convert-flame-normal.py *.png > data-flame-normal.h
 ```
 cd ..
 cd flame-flicker-source-pngs
-```
-```
 python3 convert-flame-flicker.py *.png > data-flame-flicker.h
 ```
 
