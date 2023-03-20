@@ -18,13 +18,15 @@ Clone this repo:
 
 `git clone https://github.com/snphillips/led-candle.git`
 
+Connect the Pro Trinket into your computer. The instructions below assume you connected it using USB.
+
 Using the Arduino IDE, open `led-candle.ino`.
 
 Select the Pro Trinket 5V/16MHz (USB) or Pro Trinket 3V/12MHz (USB) board from the Tools->Board menu.
 Next go into the Tools -> Programmer menu and select the USBtinyISP programmer.
 
 Upload `led-candle.ino` to the Pro Trinket board by pressing the tiny button on the Pro Trinket. Within eight seconds, select Sketch > Upload Using Programmer. Wait until you see the message "Done uploading". 
-If your code uploaded successfully, at the end of the message in the output you'll see a message like this:
+If your code uploaded successfully, at the end of the output message you'll see a paragraph like this:
 
 `Sketch uses 21632 bytes (75%) of program storage space. Maximum is 28672 bytes.
 Global variables use 506 bytes of dynamic memory.`
@@ -41,7 +43,7 @@ TODO: flush out this section further
 This project requires two short animations. If you don't like mine you can make your own.
 _You'll need [python](https://www.python.org/about/gettingstarted/) & [FFmeg](https://ffmpeg.org/) installed on your computer._
 1) Take a verticle video with you phone then airdrop to your computer.
-2) Edit the video to your liking. Remove sound track, make greyscale, adjust contrast, crop it. Keep in mind we have limited space on the small Pro Trinket. Your final animations can't be longer than about 15 seconds total.
+2) Edit the video to your liking. Remove sound track, make greyscale, adjust contrast, crop it. Keep in mind we have limited space on the small Pro Trinket. Your final animations can't be longer than about 15 seconds total. I use the mac's iMovie for this step.
 3) Export the two source videos you'd like to turn into animations. Use a low resolution as you'll eventually be resizing each frame to 9px x 16px.
 4) Place each video in their own folders named **flame-normal-source-mp4** and **flame-flicker-source-mp4**
 5) Name the normal flame video `flame-normal-source.mp4`, and name the flicker flame video `flame-flicker-source.mp4`
