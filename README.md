@@ -64,7 +64,6 @@ ffmpeg -i flame-flicker-source.mp4 -r 30/1 $flameflicker%03d.png
 11) Navigate into the flame-normal folder. Run the following python script to generate an h file. If you see a file called `data-flame-normal.h` in the folder, the script worked.
 
 ```
-cd ..
 cd flame-normal-source-pngs
 ```
 ```
@@ -74,6 +73,7 @@ python3 convert-flame-normal.py *.png > data-flame-normal.h
 12) Navigate into the flame-flicker folder. Run the following python script to generate an h file. If you see a file called `data-flame-flicker.h` in the folder, the script worked.
 
 ```
+cd ..
 cd flame-flicker-source-pngs
 ```
 ```
