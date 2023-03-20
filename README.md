@@ -98,5 +98,5 @@ python3 convert-flame-flicker.py *.png > data-flame-flicker.h
 - Charlieplex LED Matrix (Adafruit product id: 2947, 2948, 2972, 2973 or 2974)
 - 350 mAh LiPoly battery (Adafruit product id: 2750)
 - LiPoly backpack (Adafruit product id: 2124)
-- SPDT Slide Switch (Adafruit product id: 805)
+- On-Off Power Button / Pushbutton Toggle Switch (Adafruit product id: [1683](https://www.adafruit.com/product/1683))
 - Ultrasonic Distance Sensor (Adafruit product id: 4007)
