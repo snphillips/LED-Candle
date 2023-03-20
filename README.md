@@ -93,7 +93,7 @@ python3 convert-flame-flicker.py *.png > data-flame-flicker.h
 
 
 ## Parts
-- Pro Trinket microcontroller (adafruit.com/product/2010 or 2000) (#2010 = 3V/12MHz for longest battery life, but 5V/16MHz works OK)
+- Pro Trinket microcontroller (adafruit.com/product/2010 or [2000](https://www.adafruit.com/product/2010)) (#2010 = 3V/12MHz for longest battery life, but 5V/16MHz works OK)
 - Charlieplex LED Matrix Driver (Adafruit product id: 2946)
 - Charlieplex LED Matrix (Adafruit product id: 2947, 2948, 2972, 2973 or 2974)
 - 350 mAh LiPoly battery (Adafruit product id: 2750)
