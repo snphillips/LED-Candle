@@ -35,11 +35,11 @@ Global variables use 506 bytes of dynamic memory.`
 This project requires two short animations. If you don't like mine you can make your own.
 _You'll need [python](https://www.python.org/about/gettingstarted/) & [FFmeg](https://ffmpeg.org/) installed on your computer._
 1) Take a verticle video with you phone then airdrop to your computer.
-2) Edit the video to your liking. Remove sound track, make greyscale, crop it. Keep in mind we have limited space on the small Pro Trinket. Your final animations can't be longer than about 15 seconds total.
+2) Edit the video to your liking. Remove sound track, make greyscale, adjust contrast, crop it. Keep in mind we have limited space on the small Pro Trinket. Your final animations can't be longer than about 15 seconds total.
 3) Export the two source videos you'd like to turn into animations. Use a low resolution as you'll eventually be resizing each frame to 9px x 16px.
 4) Place each video in their own folders named **flame-normal-source-mp4** and **flame-flicker-source-mp4**
 5) Name the normal flame video `flame-normal-source.mp4`, and name the flicker flame video `flame-flicker-source.mp4`
-6) Rotate the videos in the finder so they're vertical
+6) Using the finder, rotate the videos in the finder so they're vertical. I also had to make my video upside down so that it was oriented properly when assembled.
 7) Navigate into the **flame-normal-source-mp4** folder. Using the `ffmpeg` library convert video to pngs (30 frames/second)
 
 ```
@@ -59,7 +59,7 @@ cd flame-flicker-source-mp4
 ffmpeg -i flame-flicker-source.mp4 -r 30/1 $flameflicker%03d.png
 ```
 
-9) Our LED matrix is only 9 pixels by 16 pixels so we need to resize the images to by tiny 9x16 using ffmpeg (TODO: insert ffmpeg instructions) or this online tool: https://bulkresizephotos.com/.
+9) Our LED matrix is only 9 pixels by 16 pixels so we need to resize the images to by tiny 9x16 using ffmpeg (TODO: insert ffmpeg instructions on shrinking video before breaking the images into pngs) or this online tool: https://bulkresizephotos.com/.
 10) Remove the full size pngs from the flame-normal & flame-flicker folders so only the tiny pngs are left. You can discard them or set them aside for safe keeping.
 11) Navigate into the flame-normal folder. Run the following python script to generate an h file. If you see a file called `data-flame-normal.h` in the folder, the script worked.
 
