@@ -94,4 +94,6 @@ python3 convert-flame-flicker.py *.png > data-flame-flicker.h
 
  
 - ## Hardware
-The big picutre is to follow the directions detailed in Phillip Burgess' Animated Flame Pendant docs, minus the section about 3D printing. Then, add in the ultrasonic distance sensor. TODO: flush out this section further
+The big picutre is to follow the directions detailed in Phillip Burgess' Animated Flame Pendant docs, minus the section about 3D printing. Then, add in the ultrasonic distance sensor.
+
+TODO: flush out this section further
