@@ -5,12 +5,12 @@ An arduino led candle that flickers when something goes near it. This project is
 ## Prerequisites
 - Read through Phillip Burgess' Animated Flame Pendant [Animated Flame Pendant docs](https://learn.adafruit.com/animated-flame-pendant).
 - Read through the [Ultrasonic Distance Sensor docs](https://learn.adafruit.com/ultrasonic-sonar-distance-sensors)
-- Have the Arduino IDE installed on your computer
+- Have the [Arduino IDE](https://www.arduino.cc/en/software) installed on your computer
 - Have the parts listed in the Parts section, plus wire, solder, flux & soldering iron
 - If you want to generate your own animations, have Python & FFmpeg installed on your computer (the leading multimedia framework): https://ffmpeg.org/
 
 
-## How to Install Software
+## How to Install Software onto Pro Trinket
 
 First, install the [Arduino IDE](https://www.arduino.cc/en/software).
 
@@ -29,9 +29,15 @@ If your code uploaded successfully, at the end of the message in the output you'
 `Sketch uses 21632 bytes (75%) of program storage space. Maximum is 28672 bytes.
 Global variables use 506 bytes of dynamic memory.`
 
+Nothing will happen yet, but now the code is on your Pro Trinket.
+
+## How to Assemble Hardware
+The big picutre is to follow the directions detailed in Phillip Burgess' Animated Flame Pendant docs, minus the section about 3D printing. Then, add in the ultrasonic distance sensor.
+
+TODO: flush out this section further
 
 
-## Generate Your Own Animations
+## How to Generate Your Own Animations
 This project requires two short animations. If you don't like mine you can make your own.
 _You'll need [python](https://www.python.org/about/gettingstarted/) & [FFmeg](https://ffmpeg.org/) installed on your computer._
 1) Take a verticle video with you phone then airdrop to your computer.
@@ -92,9 +98,3 @@ python3 convert-flame-flicker.py *.png > data-flame-flicker.h
 - LiPoly backpack (Adafruit product id: 2124)
 - SPDT Slide Switch (Adafruit product id: 805)
 - Ultrasonic Distance Sensor (Adafruit product id: 4007)
-
- 
-- ## Hardware
-The big picutre is to follow the directions detailed in Phillip Burgess' Animated Flame Pendant docs, minus the section about 3D printing. Then, add in the ultrasonic distance sensor.
-
-TODO: flush out this section further
