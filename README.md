@@ -66,7 +66,7 @@ This command will take the input file `flame-flicker-source.mp4`, apply the grey
 
 
 ```
-ffmpeg -i flame-flicker-source.mp4 -vf "colorspace=gray,transpose=2,transpose=2" flame-flicker-grayscale-rotate.mp4
+ffmpeg -i flame-flicker-source.mp4 -vf "format=gray,transpose=2,transpose=2" flame-flicker-grayscale-rotate.mp4
 ```
 
 
@@ -105,7 +105,7 @@ python3 convert-flicker-flicker.py *.png > data-flame-flicker.h
 12) Repeat steps 6 through 11 for the normal video flame-normal-source.mp4. Here are all the comands with flicker replaced with normal:
 
 ```
-ffmpeg -i flame-normal-source.mp4 -vf "colorspace=gray,transpose=2,transpose=2" flame-normal-grayscale-rotate.mp4
+ffmpeg -i flame-normal-source.mp4 -vf "format=gray,transpose=2,transpose=2" flame-normal-grayscale-rotate.mp4
 ffmpeg -i flame-normal-grayscale-rotate.mp4 -vf "scale=w=9:h=16:force_original_aspect_ratio=decrease,pad=9:16:(ow-iw)/2:(oh-ih)/2:color=black:shortest=1" -aspect 9:16 flame-normal-resized.mp4
 ffmpeg -i flame-normal-resized.mp4 -r 30/1 flame-normal%03d.png
 ```
