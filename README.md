@@ -71,11 +71,17 @@ ffmpeg -i flame-flicker-source.mp4 -vf "colorspace=gray,transpose=2,transpose=2"
 ffmpeg -i flame-flicker-grayscale-rotate.mp4 -vf "scale=w=9:h=16:force_original_aspect_ratio=decrease,pad=9:16:(ow-iw)/2:(oh-ih)/2:color=black:shortest=1" -aspect 9:16 flame-flicker-resized.mp4
 ```
 
-8) Using the `FFmpeg` library convert video to pngs (30 frames/second)
+8) Using the `FFmpeg` library convert video to pngs (30 frames/second). Explanation of the following command:
+
+`-i flame-flicker-resized.mp4`: specifies the input video file name.
+`-r 30`: specifies the frame rate of the output PNG images.
+`flame-flicker_%03d.png`: specifies the naming convention of the output PNG files. %03d is a placeholder that will be replaced by a three-digit number that represents the frame number.
+This command will extract the frames from the video and save them as PNG images with names like flame-flicker_001.png, flame-flicker_002.png, etc. in the same directory as the input video file.Explanation of the command:
+
 
 ```
-cd flame-normal-source-mp4
-ffmpeg -i flame-normal-source.mp4 -r 30/1 $flamenormal%03d.png
+ffmpeg -i flame-flicker-resized.mp4 -r 30 flame-flicker_%03d.png
+
 ```
 
 8) Navigate into the flame-flicker folder. Using the `ffmpeg` library convert video to pngs (30 frames/second)
