@@ -91,45 +91,22 @@ ffmpeg -i flame-flicker-resized.mp4 -r 30/1 flame-flicker_%03d.png
 
 ```
 
-8) Navigate into the flame-flicker folder. Using the `ffmpeg` library convert video to pngs (30 frames/second)
-
-
-```
-cd ..
-cd flame-flicker-source-mp4
-ffmpeg -i flame-flicker-source.mp4 -r 30/1 $flameflicker%03d.png
-```
 
 9) Move the tiny pngs into the folder flame-flicker-source-pngs.
 
-10) Navigate into the flame-normal folder. 
+10) Navigate into the flame-normal folder then run the following python script to generate an `h` file. If you see a file called `data-flame-flicker.h` in the folder, the script worked.
 
 ```
-cd flame-normal-source-pngs
+python3 convert-flicker-flicker.py *.png > data-flame-flicker.h
 ```
 
-11) Run the following python script to generate an h file. If you see a file called `data-flame-normal.h` in the folder, the script worked.
+11) Move the `h` file `data-flame-flicker.h` into the root of the project folder: led-candle.
 
-```
-python3 convert-flicker-normal.py *.png > data-flame-normal.h
-```
 
-```
-cd flame-normal-source-pngs
-python3 convert-flame-normal.py *.png > data-flame-normal.h
-```
+12) Repeat steps 6 through 11 for the normal video flame-normal-source.mp4.
 
-12) Navigate into the flame-flicker folder. Run the following python script to generate an h file. If you see a file called `data-flame-flicker.h` in the folder, the script worked.
 
-```
-cd ..
-cd flame-flicker-source-pngs
-python3 convert-flame-flicker.py *.png > data-flame-flicker.h
-```
-
-13) Move the two `h` files `data-flame-normal.h` & `data-flame-flicker.h` into the root of the project folder: led-candle.
-
-14) Confirm that the project folder contains the three files needed to upload to the Adafruit Pro Trinket: `led-candle.ino`, `data-flame-normal.h`, `data-flame-flicker.h`.
+13) Confirm that the project folder contains the three files needed to upload to the Adafruit Pro Trinket: `led-candle.ino`, `data-flame-normal.h`, `data-flame-flicker.h`.
 
 
 ## Parts
