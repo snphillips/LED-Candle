@@ -41,14 +41,33 @@ TODO: flush out this section further
 
 ## How to Generate Your Own Animations
 This project requires two short animations. If you don't like mine you can make your own.
-_You'll need [python](https://www.python.org/about/gettingstarted/) & [FFmeg](https://ffmpeg.org/) installed on your computer._
+_You'll need [python](https://www.python.org/about/gettingstarted/) & [FFmpeg](https://ffmpeg.org/) installed on your computer._
 1) Take a verticle video with you phone then airdrop to your computer.
-2) Edit the video to your liking. Remove sound track, make greyscale, adjust contrast, crop it. Keep in mind we have limited space on the small Pro Trinket. Your final animations can't be longer than about 15 seconds total. I use the mac's iMovie for this step.
+2) Edit the video to your liking. Remove sound track, adjust contrast, crop it. Keep in mind we have limited space on the small Pro Trinket. Your final animations can't be longer than about 15 seconds total. I use the mac's iMovie for this step.
 3) Export the two source videos you'd like to turn into animations. Use a low resolution as you'll eventually be resizing each frame to 9px x 16px.
 4) Place each video in their own folders named **flame-normal-source-mp4** and **flame-flicker-source-mp4**
 5) Name the normal flame video `flame-normal-source.mp4`, and name the flicker flame video `flame-flicker-source.mp4`
-6) Using the finder, rotate the videos in the finder so they're vertical. I also had to make my video upside down so that it was oriented properly when assembled.
-7) Navigate into the **flame-normal-source-mp4** folder. Using the `ffmpeg` library convert video to pngs (30 frames/second)
+Navigate into the **flame-flicker-source-mp4** folder. 
+
+```
+cd flame-normal-source-mp4
+```
+
+6) Using the command line, use FFmpeg to make the video grayscale and rotate the videos so they're vertical. I also had to make my video upside down so that it was oriented properly when assembled.
+
+This command will take the input file `flame-flicker-source.mp4`, apply the greyscale effect using the colorspace filter, and then rotate the video 180 degrees using the transpose filter. The output will be saved as `flame-flicker-grayscale-rotate.mp4`.
+
+```
+ffmpeg -i flame-flicker-source.mp4 -vf "colorspace=gray,transpose=2,transpose=2" flame-flicker-grayscale-rotate.mp4
+```
+
+7) Our LED matrix is only 9 pixels by 16 pixels so we need to resize the video to have tiny dimensions of 9x16 using FFmpeg. The following command scales the video to an aspect ratio of 9:16 while maintaining even dimensions and then adds padding to bring the output dimensions to 9x16. The shortest=1 option tells the pad filter to use the shortest input duration, which should prevent the output from being all black.
+
+```
+ffmpeg -i flame-flicker-grayscale-rotate.mp4 -vf "scale=w=9:h=16:force_original_aspect_ratio=decrease,pad=9:16:(ow-iw)/2:(oh-ih)/2:color=black:shortest=1" -aspect 9:16 flame-flicker-resized.mp4
+```
+
+8) Using the `ffmpeg` library convert video to pngs (30 frames/second)
 
 ```
 cd flame-normal-source-mp4
