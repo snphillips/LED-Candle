@@ -88,7 +88,6 @@ This command will extract the frames from the video and save them as PNG images 
 
 ```
 ffmpeg -i flame-flicker-resized.mp4 -r 30/1 flame-flicker_%03d.png
-
 ```
 
 
