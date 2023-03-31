@@ -16,7 +16,9 @@ First, install the [Arduino IDE](https://www.arduino.cc/en/software).
 
 Clone this repo:
 
+
 `git clone https://github.com/snphillips/led-candle.git`
+
 
 Connect the Pro Trinket into your computer. The instructions below assume you connected it using USB.
 
@@ -28,8 +30,10 @@ Next go into the Tools -> Programmer menu and select the USBtinyISP programmer.
 Upload `led-candle.ino` to the Pro Trinket board by pressing the tiny button on the Pro Trinket. Within eight seconds, select Sketch > Upload Using Programmer. Wait until you see the message "Done uploading". 
 If your code uploaded successfully, at the end of the output message you'll see a paragraph like this:
 
+
 `Sketch uses 21632 bytes (75%) of program storage space. Maximum is 28672 bytes.
 Global variables use 506 bytes of dynamic memory.`
+
 
 Nothing will happen yet, but now the code is on your Pro Trinket.
 
@@ -50,9 +54,11 @@ _You'll need [python](https://www.python.org/about/gettingstarted/) & [FFmpeg](h
 
 It's now time to use `FFmpeg` to further edit the video more and create PNGs. Navigate into the **flame-flicker-source-mp4** folder. 
 
+
 ```
 cd flame-normal-source-mp4
 ```
+
 
 6) Using the command line, use `FFmpeg` to make the video grayscale and rotate the videos so they're vertical. I also had to make my video upside down so that it was oriented properly when assembled.
 
@@ -87,15 +93,26 @@ ffmpeg -i flame-flicker-resized.mp4 -r 30/1 flame-flicker_%03d.png
 
 8) Navigate into the flame-flicker folder. Using the `ffmpeg` library convert video to pngs (30 frames/second)
 
+
 ```
 cd ..
 cd flame-flicker-source-mp4
 ffmpeg -i flame-flicker-source.mp4 -r 30/1 $flameflicker%03d.png
 ```
 
-9) Our LED matrix is only 9 pixels by 16 pixels so we need to resize the images to by tiny 9x16 using ffmpeg (TODO: insert ffmpeg instructions on shrinking video before breaking the images into pngs) or this online tool: https://bulkresizephotos.com/.
-10) Remove the full size pngs from the flame-normal & flame-flicker folders so only the tiny pngs are left. You can discard them or set them aside for safe keeping.
-11) Navigate into the flame-normal folder. Run the following python script to generate an h file. If you see a file called `data-flame-normal.h` in the folder, the script worked.
+9) Move the tiny pngs into the folder flame-flicker-source-pngs.
+
+10) Navigate into the flame-normal folder. 
+
+```
+cd flame-normal-source-pngs
+```
+
+11) Run the following python script to generate an h file. If you see a file called `data-flame-normal.h` in the folder, the script worked.
+
+```
+python3 convert-flicker-normal.py *.png > data-flame-normal.h
+```
 
 ```
 cd flame-normal-source-pngs
@@ -111,6 +128,7 @@ python3 convert-flame-flicker.py *.png > data-flame-flicker.h
 ```
 
 13) Move the two `h` files `data-flame-normal.h` & `data-flame-flicker.h` into the root of the project folder: led-candle.
+
 14) Confirm that the project folder contains the three files needed to upload to the Adafruit Pro Trinket: `led-candle.ino`, `data-flame-normal.h`, `data-flame-flicker.h`.
 
 
