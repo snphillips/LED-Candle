@@ -24,7 +24,7 @@ Connect the Pro Trinket into your computer. The instructions below assume you co
 
 Using the Arduino IDE, open `led-candle.ino`.
 
-Select the Pro Trinket 5V/16MHz (USB) or Pro Trinket 3V/12MHz (USB) board from the Tools->Board menu.
+Select the Pro Trinket 5V/16MHz (USB) or Pro Trinket 3V/12MHz (USB) board (dependinng on which version you have) from the Tools->Board menu.
 Next go into the Tools -> Programmer menu and select the USBtinyISP programmer.
 
 Upload `led-candle.ino` to the Pro Trinket board by pressing the tiny button on the Pro Trinket. Within eight seconds, select Sketch > Upload Using Programmer. Wait until you see the message "Done uploading". 
