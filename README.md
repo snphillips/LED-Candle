@@ -96,7 +96,7 @@ ffmpeg -i flame-flicker-rotated.mp4 -vf "scale=9:16" -c:v libvpx-vp9 -b:v 1M -cr
 - Navigate into the **flame-flicker-source-pngs** folder then run the following python script to generate an `h` file. After you've run the script, if you see a file called `data-flame-flicker.h` in the folder, the script worked.
 
 ```
-python3 convert-flicker-flicker.py *.png > data-flame-flicker.h
+python3 convert-flame-flicker.py *.png > data-flame-flicker.h
 ```
 
 - Move the `h` file `data-flame-flicker.h` into the root of the project folder: led-candle.
