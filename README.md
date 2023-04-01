@@ -111,10 +111,10 @@ ffmpeg -i "flame-normal-source.mp4" -vf "format=gray" "flame-normal-grayscale.mp
 ffmpeg -i flame-normal-grayscale.mp4 -vf "transpose=2,transpose=2" flame-normal-rotated.mp4
 ```
 ```
-ffmpeg -i flame-normal-rotated.mp4 -vf "scale=9:16" -c:v libvpx-vp9 -b:v 1M -crf 31 -threads 4 flame-normal-9x16.webm
+ffmpeg -i flame-normal-rotated.mp4 -vf scale=10:16 flame-normal-10x16.mp4 
 ```
 ```
-ffmpeg -i flame-normal-9x16.webm -vf fps=30 normal-frame-%03d.png
+ffmpeg -i flame-normal-10x16.mp4 -vf fps=30 normal-frame-%03d.png
 ```
 
 - Move the tiny pngs into the folder **flame-normal-source-pngs**.
