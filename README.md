@@ -45,7 +45,9 @@ TODO: flush out this section further
 
 ## How to Generate Your Own Animations
 This project requires two short animations. If you don't like mine you can make your own.
-_You'll need [python](https://www.python.org/about/gettingstarted/) & [FFmpeg](https://ffmpeg.org/) installed on your computer._
+
+You'll need [python](https://www.python.org/about/gettingstarted/) & [FFmpeg](https://ffmpeg.org/) installed on your computer._
+
 -  Take a verticle video with you phone then airdrop to your computer.
 - Edit the video to your liking. Remove sound track, adjust contrast, crop it. Keep in mind we have limited space on the small Pro Trinket. Your final animations can't be longer than about 15 seconds total. I use the mac's iMovie for this step.
 - Export the two source videos you'd like to turn into animations. Use a low resolution as you'll eventually be resizing each frame to 9px x 16px.
