@@ -105,8 +105,14 @@ python3 convert-flicker-flicker.py *.png > data-flame-flicker.h
 
 ```
 ffmpeg -i "flame-flicker-source.mp4" -vf "format=gray" "flame-flicker-grayscale.mp4"
+```
+```
 ffmpeg -i flame-flicker-grayscale.mp4 -vf "transpose=2,transpose=2" flame-flicker-rotated.mp4
+```
+```
 ffmpeg -i flame-flicker-rotated.mp4 -vf "scale=9:16" -c:v libvpx-vp9 -b:v 1M -crf 31 -threads 4 flame-flicker-9x16.webm
+```
+```
 ffmpeg -i flame-flicker-9x16.webm -vf fps=30 flicker-frame-%03d.png
 ```
 
