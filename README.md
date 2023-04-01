@@ -14,20 +14,20 @@ An arduino led candle that flickers when something goes near it. This project is
 
 First, install the [Arduino IDE](https://www.arduino.cc/en/software).
 
-Clone this repo:
+- Clone this repo:
 
 
 `git clone https://github.com/snphillips/led-candle.git`
 
 
-Connect the Pro Trinket into your computer. The instructions below assume you connected it using USB.
+- Connect the Pro Trinket into your computer. The instructions below assume you connected it using USB.
 
-Using the Arduino IDE, open `led-candle.ino`.
+- Using the Arduino IDE, open `led-candle.ino`.
 
-Select the Pro Trinket 5V/16MHz (USB) or Pro Trinket 3V/12MHz (USB) board (depending on which version you have) from the Tools->Board menu.
+- Select the Pro Trinket 5V/16MHz (USB) or Pro Trinket 3V/12MHz (USB) board (depending on which version you have) from the Tools->Board menu.
 Next go into the Tools -> Programmer menu and select the USBtinyISP programmer.
 
-Upload `led-candle.ino` to the Pro Trinket board by pressing the tiny button on the Pro Trinket. Within eight seconds, select Sketch > Upload Using Programmer. Wait until you see the message "Done uploading". 
+- Upload `led-candle.ino` to the Pro Trinket board by pressing the tiny button on the Pro Trinket. Within eight seconds, select Sketch > Upload Using Programmer. Wait until you see the message "Done uploading". 
 If your code uploaded successfully, at the end of the output message you'll see a paragraph like this:
 
 
@@ -46,14 +46,15 @@ TODO: flush out this section further
 ## How to Generate Your Own Animations
 This project requires two short animations. If you don't like mine you can make your own.
 
-You'll need [python](https://www.python.org/about/gettingstarted/) & [FFmpeg](https://ffmpeg.org/) installed on your computer._
+You'll need [python](https://www.python.org/about/gettingstarted/) & [FFmpeg](https://ffmpeg.org/) installed on your computer.
 
-- Take a vertical video with you phone then airdrop to your computer.
-- Edit the video to your liking. Remove sound track, adjust contrast, crop it. Keep in mind we have limited space on the small Pro Trinket. Your final animations can't be longer than about 15 seconds total. I use the mac's iMovie for this step.
+- Take two vertical videos with you phone then airdrop them it to your computer.
+- Edit the video to your liking. I use the mac's iMovie for this step. Remove the sound track, adjust contrast, crop it. Keep in mind we have limited space on the small Pro Trinket. Your final animations can't be longer than about 15 seconds total.
 - Export the two source videos you'd like to turn into animations. Use a low resolution as you'll eventually be resizing each frame to 9px x 16px.
 - Place each video in their own folders named **flame-normal-source-mp4** and **flame-flicker-source-mp4**
 - Name the normal flame video `flame-normal-source.mp4`, and name the flicker flame video `flame-flicker-source.mp4`
-- We're going to use `FFmpeg` to further edit the video more and create PNGs. Navigate into the **flame-flicker-source-mp4** folder. 
+- We're going to use `FFmpeg` to further edit the video more and create PNGs. 
+- We'll start by editing the flicker video. Navigate into the **flame-flicker-source-mp4** folder: 
 
 
 ```
@@ -67,7 +68,7 @@ ffmpeg -i "flame-flicker-source.mp4" -vf "format=gray" "flame-flicker-grayscale.
 ```
 
 
-- Now we need to rotate the video so it's upside down so that it is oriented properly when assembled. This command takes the input file "flame-flicker-grayscale.mp4", applies the transpose filter twice (which rotates the video 90 degrees each time), resulting in a 180-degree rotation, and saves the output as "flame-flicker-rotated.mp4".
+- Now we need to rotate the video so it's upside down so that it is oriented properly when the unit is assembled. This command takes the input file "flame-flicker-grayscale.mp4", applies the transpose filter twice (which rotates the video 90 degrees each time), resulting in a 180-degree rotation, and saves the output as "flame-flicker-rotated.mp4".
 
 
 ```
@@ -83,14 +84,14 @@ ffmpeg -i flame-flicker-rotated.mp4 -vf "scale=9:16" -c:v libvpx-vp9 -b:v 1M -cr
 ```
 
 
-- Convert video to pngs (30 frames/second). The following command takes the input file "flame-flicker-9x16.webm", applies the fps filter to specify 30 frames per second, and saves the output as a series of PNG images with the naming pattern "flicker-frame-001.png", "flicker-frame-002.png", and so on. The %03d in the output file name is a placeholder for the frame number, which will be zero-padded to 3 digits (e.g., 001, 002, 003, etc.).
+- Convert the video to a suite of PNGs. Every second of video will generate 30 PNGs (30 frames/second). The following command takes the input file "flame-flicker-9x16.webm", applies the fps filter to specify 30 frames per second, and saves the output as a series of PNG images with the naming pattern "flicker-frame-001.png", "flicker-frame-002.png", and so on. The %03d in the output file name is a placeholder for the frame number, which will be zero-padded to 3 digits (e.g., 001, 002, 003, etc.).
 
 ```
  ffmpeg -i flame-flicker-9x16.webm -vf fps=30 flicker-frame-%03d.png
 ```
 
 
-- Move the tiny pngs into the folder **flame-flicker-source-pngs**.
+- Move the tiny PNGs into the folder **flame-flicker-source-pngs**.
 
 - Navigate into the **flame-flicker-source-pngs** folder then run the following python script to generate an `h` file. After you've run the script, if you see a file called `data-flame-flicker.h` in the folder, the script worked.
 
@@ -126,6 +127,12 @@ python3 convert-flame-normal.py *.png > data-flame-normal.h
 - Move the `h` file `data-flame-flicker.h` into the root of the project folder: led-candle.
 
 - Confirm that the project folder contains the three files needed to upload to the Adafruit Pro Trinket: `led-candle.ino`, `data-flame-normal.h`, `data-flame-flicker.h`.
+
+- Connect the Pro Trinket into your computer. The instructions below assume you connected it using USB.
+
+- Using the Arduino IDE, open `led-candle.ino`.
+
+- Upload `led-candle.ino`, `data-flame-normal.h` & `data-flame-flicker.h` to the Pro Trinket board by pressing the tiny button on the Pro Trinket. Within eight seconds, select Sketch > Upload Using Programmer. Wait until you see the message "Done uploading". 
 
 
 ## Parts
