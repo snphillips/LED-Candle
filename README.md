@@ -53,10 +53,7 @@ You'll need [python](https://www.python.org/about/gettingstarted/) & [FFmpeg](ht
 - Export the two source videos you'd like to turn into animations. Use a low resolution as you'll eventually be resizing each frame to 9px x 16px.
 - Place each video in their own folders named **flame-normal-source-mp4** and **flame-flicker-source-mp4**
 -  Name the normal flame video `flame-normal-source.mp4`, and name the flicker flame video `flame-flicker-source.mp4`
-
-We're going to use `FFmpeg` to further edit the video more and create PNGs. 
-
-Navigate into the **flame-flicker-source-mp4** folder. 
+- We're going to use `FFmpeg` to further edit the video more and create PNGs. Navigate into the **flame-flicker-source-mp4** folder. 
 
 
 ```
@@ -70,38 +67,27 @@ ffmpeg -i "flame-flicker-source.mp4" -vf "format=gray" "flame-flicker-grayscale.
 ```
 
 
-- Now we need to rotate the video so it's upside down so that it is oriented properly when assembled.
-
-This command takes the input file "flame-flicker-grayscale.mp4", applies the transpose filter twice (which rotates the video 90 degrees each time), resulting in a 180-degree rotation, and saves the output as "flame-flicker-rotated.mp4".
+- Now we need to rotate the video so it's upside down so that it is oriented properly when assembled. This command takes the input file "flame-flicker-grayscale.mp4", applies the transpose filter twice (which rotates the video 90 degrees each time), resulting in a 180-degree rotation, and saves the output as "flame-flicker-rotated.mp4".
 
 
 ```
 ffmpeg -i flame-flicker-grayscale.mp4 -vf "transpose=2,transpose=2" flame-flicker-rotated.mp4
-
 ```
 
 
-- Our LED matrix is only 9 pixels by 16 pixels so we need to resize the video to have tiny dimensions of 9x16 using `FFmpeg`.
+- Our LED matrix is only 9 pixels by 16 pixels so we need to resize the video to have tiny dimensions of 9x16 using `FFmpeg`. This command takes the input file "flame-flicker-rotated.mp4", applies the scale filter with the specified dimensions (9x16 pixels), sets the video codec to libvpx-vp9, specifies a bitrate of 1M, sets the Constant Rate Factor (CRF) to 31 for quality, uses 4 threads for encoding, and saves the output as "flame-flicker-9x16.webm". Note that the output file format is changed to .webm since VP9 is not typically used with .mp4 containers.
 
 
 ```
 ffmpeg -i flame-flicker-rotated.mp4 -vf "scale=9:16" -c:v libvpx-vp9 -b:v 1M -crf 31 -threads 4 flame-flicker-9x16.webm
-
 ```
 
-This command takes the input file "flame-flicker-rotated.mp4", applies the scale filter with the specified dimensions (9x16 pixels), sets the video codec to libvpx-vp9, specifies a bitrate of 1M, sets the Constant Rate Factor (CRF) to 31 for quality, uses 4 threads for encoding, and saves the output as "flame-flicker-9x16.webm".
 
-Note that the output file format is changed to .webm since VP9 is not typically used with .mp4 containers.
-
-8) Using the `FFmpeg` library convert video to pngs (30 frames/second).
+- Convert video to pngs (30 frames/second). This command takes the input file "flame-flicker-9x16.webm", applies the fps filter to specify 30 frames per second, and saves the output as a series of PNG images with the naming pattern "flicker-frame-001.png", "flicker-frame-002.png", and so on. The %03d in the output file name is a placeholder for the frame number, which will be zero-padded to 3 digits (e.g., 001, 002, 003, etc.).
 
 ```
  ffmpeg -i flame-flicker-9x16.webm -vf fps=30 flicker-frame-%03d.png
 ```
-
-This command takes the input file "flame-flicker-9x16.webm", applies the fps filter to specify 30 frames per second, and saves the output as a series of PNG images with the naming pattern "flicker-frame-001.png", "flicker-frame-002.png", and so on.
-
-The %03d in the output file name is a placeholder for the frame number, which will be zero-padded to 3 digits (e.g., 001, 002, 003, etc.).
 
 
 - Move the tiny pngs into the folder flame-flicker-source-pngs.
