@@ -76,18 +76,18 @@ ffmpeg -i flame-flicker-grayscale.mp4 -vf "transpose=2,transpose=2" flame-flicke
 ```
 
 
-- Our LED matrix is only 9 pixels by 16 pixels so we need to resize the video to have tiny dimensions of 9x16. The following command takes the input file "flame-flicker-rotated.mp4", applies the scale filter with the specified dimensions (9x16 pixels), sets the video codec to libvpx-vp9, specifies a bitrate of 1M, sets the Constant Rate Factor (CRF) to 31 for quality, uses 4 threads for encoding, and saves the output as "flame-flicker-9x16.webm". Note that the output file format is changed to .webm since VP9 is not typically used with .mp4 containers.
+- Our LED matrix is only 9 pixels by 16 pixels so we need to resize the video to have tiny dimensions of 10x16.
 
 
 ```
-ffmpeg -i flame-flicker-rotated.mp4 -vf "scale=9:16" -c:v libvpx-vp9 -b:v 1M -crf 31 -threads 4 flame-flicker-9x16.webm
+ffmpeg -i flame-flicker-rotated.mp4 -vf scale=10:16 flame-flicker-10x16.mp4 
 ```
 
 
 - Convert the video to a suite of PNGs. Every second of video will generate 30 PNGs (30 frames/second). The following command takes the input file "flame-flicker-9x16.webm", applies the fps filter to specify 30 frames per second, and saves the output as a series of PNG images with the naming pattern "flicker-frame-001.png", "flicker-frame-002.png", and so on. The %03d in the output file name is a placeholder for the frame number, which will be zero-padded to 3 digits (e.g., 001, 002, 003, etc.).
 
 ```
- ffmpeg -i flame-flicker-9x16.webm -vf fps=30 flicker-frame-%03d.png
+ ffmpeg -i flame-flicker-10x16.mp4 -vf "fps=30,scale=9:16" flicker-frame-%03d.png
 ```
 
 
