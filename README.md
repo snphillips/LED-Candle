@@ -46,11 +46,11 @@ TODO: flush out this section further
 ## How to Generate Your Own Animations
 This project requires two short animations. If you don't like mine you can make your own.
 _You'll need [python](https://www.python.org/about/gettingstarted/) & [FFmpeg](https://ffmpeg.org/) installed on your computer._
-1) Take a verticle video with you phone then airdrop to your computer.
-2) Edit the video to your liking. Remove sound track, adjust contrast, crop it. Keep in mind we have limited space on the small Pro Trinket. Your final animations can't be longer than about 15 seconds total. I use the mac's iMovie for this step.
-3) Export the two source videos you'd like to turn into animations. Use a low resolution as you'll eventually be resizing each frame to 9px x 16px.
-4) Place each video in their own folders named **flame-normal-source-mp4** and **flame-flicker-source-mp4**
-5) Name the normal flame video `flame-normal-source.mp4`, and name the flicker flame video `flame-flicker-source.mp4`
+-  Take a verticle video with you phone then airdrop to your computer.
+- Edit the video to your liking. Remove sound track, adjust contrast, crop it. Keep in mind we have limited space on the small Pro Trinket. Your final animations can't be longer than about 15 seconds total. I use the mac's iMovie for this step.
+- Export the two source videos you'd like to turn into animations. Use a low resolution as you'll eventually be resizing each frame to 9px x 16px.
+- Place each video in their own folders named **flame-normal-source-mp4** and **flame-flicker-source-mp4**
+-  Name the normal flame video `flame-normal-source.mp4`, and name the flicker flame video `flame-flicker-source.mp4`
 
 We're going to use `FFmpeg` to further edit the video more and create PNGs. 
 
@@ -61,14 +61,14 @@ Navigate into the **flame-flicker-source-mp4** folder.
 cd flame-flicker-source-mp4
 ```
 
-6) Using the command line, use `FFmpeg` to make the video grayscale with the following command:
+- Using the command line, use `FFmpeg` to make the video grayscale with the following command:
 
 ```
 ffmpeg -i "flame-flicker-source.mp4" -vf "format=gray" "flame-flicker-grayscale.mp4"
 ```
 
 
-7) Now we need to rotate the video so it's upside down so that it is oriented properly when assembled.
+- Now we need to rotate the video so it's upside down so that it is oriented properly when assembled.
 
 This command takes the input file "flame-flicker-grayscale.mp4", applies the transpose filter twice (which rotates the video 90 degrees each time), resulting in a 180-degree rotation, and saves the output as "flame-flicker-rotated.mp4".
 
@@ -79,7 +79,7 @@ ffmpeg -i flame-flicker-grayscale.mp4 -vf "transpose=2,transpose=2" flame-flicke
 ```
 
 
-7) Our LED matrix is only 9 pixels by 16 pixels so we need to resize the video to have tiny dimensions of 9x16 using `FFmpeg`.
+- Our LED matrix is only 9 pixels by 16 pixels so we need to resize the video to have tiny dimensions of 9x16 using `FFmpeg`.
 
 
 ```
@@ -102,18 +102,18 @@ This command takes the input file "flame-flicker-9x16.webm", applies the fps fil
 The %03d in the output file name is a placeholder for the frame number, which will be zero-padded to 3 digits (e.g., 001, 002, 003, etc.).
 
 
-9) Move the tiny pngs into the folder flame-flicker-source-pngs.
+- Move the tiny pngs into the folder flame-flicker-source-pngs.
 
-10) Navigate into the flame-normal folder then run the following python script to generate an `h` file. If you see a file called `data-flame-flicker.h` in the folder, the script worked.
+- Navigate into the flame-normal folder then run the following python script to generate an `h` file. If you see a file called `data-flame-flicker.h` in the folder, the script worked.
 
 ```
 python3 convert-flicker-flicker.py *.png > data-flame-flicker.h
 ```
 
-11) Move the `h` file `data-flame-flicker.h` into the root of the project folder: led-candle.
+- Move the `h` file `data-flame-flicker.h` into the root of the project folder: led-candle.
 
 
-12) Repeat steps 6 through 11 for the normal video flame-normal-source.mp4. Here are all the comands with flicker replaced with normal:
+- Repeat steps 6 through 11 for the normal video flame-normal-source.mp4. Here are all the comands with flicker replaced with normal:
 
 ```
 ffmpeg -i flame-normal-source.mp4 -vf "format=gray,transpose=2,transpose=2" flame-normal-grayscale-rotate.mp4
@@ -126,7 +126,7 @@ python3 convert-normal-flicker.py *.png > data-flame-normal.h
 ```
 
 
-13) Confirm that the project folder contains the three files needed to upload to the Adafruit Pro Trinket: `led-candle.ino`, `data-flame-normal.h`, `data-flame-flicker.h`.
+- Confirm that the project folder contains the three files needed to upload to the Adafruit Pro Trinket: `led-candle.ino`, `data-flame-normal.h`, `data-flame-flicker.h`.
 
 
 ## Parts
