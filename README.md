@@ -24,7 +24,7 @@ Connect the Pro Trinket into your computer. The instructions below assume you co
 
 Using the Arduino IDE, open `led-candle.ino`.
 
-Select the Pro Trinket 5V/16MHz (USB) or Pro Trinket 3V/12MHz (USB) board (dependinng on which version you have) from the Tools->Board menu.
+Select the Pro Trinket 5V/16MHz (USB) or Pro Trinket 3V/12MHz (USB) board (depending on which version you have) from the Tools->Board menu.
 Next go into the Tools -> Programmer menu and select the USBtinyISP programmer.
 
 Upload `led-candle.ino` to the Pro Trinket board by pressing the tiny button on the Pro Trinket. Within eight seconds, select Sketch > Upload Using Programmer. Wait until you see the message "Done uploading". 
@@ -38,7 +38,7 @@ Global variables use 506 bytes of dynamic memory.`
 Nothing will happen yet, but now the code is on your Pro Trinket.
 
 ## How to Assemble Hardware
-The big picutre is to follow the directions detailed in Phillip Burgess' Animated Flame Pendant docs, minus the section about 3D printing. Then, add in the ultrasonic distance sensor.
+The big picture is to follow the directions detailed in Phillip Burgess' Animated Flame Pendant docs, minus the section about 3D printing. Then, add in the ultrasonic distance sensor.
 
 TODO: flush out this section further
 
@@ -48,7 +48,7 @@ This project requires two short animations. If you don't like mine you can make 
 
 You'll need [python](https://www.python.org/about/gettingstarted/) & [FFmpeg](https://ffmpeg.org/) installed on your computer._
 
--  Take a verticle video with you phone then airdrop to your computer.
+- Take a vertical video with you phone then airdrop to your computer.
 - Edit the video to your liking. Remove sound track, adjust contrast, crop it. Keep in mind we have limited space on the small Pro Trinket. Your final animations can't be longer than about 15 seconds total. I use the mac's iMovie for this step.
 - Export the two source videos you'd like to turn into animations. Use a low resolution as you'll eventually be resizing each frame to 9px x 16px.
 - Place each video in their own folders named **flame-normal-source-mp4** and **flame-flicker-source-mp4**
@@ -138,4 +138,4 @@ python3 convert-normal-flicker.py *.png > data-flame-normal.h
 - 350 mAh LiPoly battery (Adafruit product id: [2750](https://www.adafruit.com/product/2750))
 - LiPoly backpack (Adafruit product id: [2124](https://www.adafruit.com/product/2224))
 - On-Off Power Button / Pushbutton Toggle Switch (Adafruit product id: [1683](https://www.adafruit.com/product/1683))
-- Ultrasonic Distance Sensor (Adafruit product id: [4007](https://www.adafruit.com/product/4007)
+- Ultrasonic Distance Sensor (Adafruit product id: [4007](https://www.adafruit.com/product/4007))
