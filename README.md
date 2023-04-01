@@ -52,7 +52,7 @@ You'll need [python](https://www.python.org/about/gettingstarted/) & [FFmpeg](ht
 - Edit the video to your liking. Remove sound track, adjust contrast, crop it. Keep in mind we have limited space on the small Pro Trinket. Your final animations can't be longer than about 15 seconds total. I use the mac's iMovie for this step.
 - Export the two source videos you'd like to turn into animations. Use a low resolution as you'll eventually be resizing each frame to 9px x 16px.
 - Place each video in their own folders named **flame-normal-source-mp4** and **flame-flicker-source-mp4**
--  Name the normal flame video `flame-normal-source.mp4`, and name the flicker flame video `flame-flicker-source.mp4`
+- Name the normal flame video `flame-normal-source.mp4`, and name the flicker flame video `flame-flicker-source.mp4`
 - We're going to use `FFmpeg` to further edit the video more and create PNGs. Navigate into the **flame-flicker-source-mp4** folder. 
 
 
@@ -75,7 +75,7 @@ ffmpeg -i flame-flicker-grayscale.mp4 -vf "transpose=2,transpose=2" flame-flicke
 ```
 
 
-- Our LED matrix is only 9 pixels by 16 pixels so we need to resize the video to have tiny dimensions of 9x16 using `FFmpeg`. This command takes the input file "flame-flicker-rotated.mp4", applies the scale filter with the specified dimensions (9x16 pixels), sets the video codec to libvpx-vp9, specifies a bitrate of 1M, sets the Constant Rate Factor (CRF) to 31 for quality, uses 4 threads for encoding, and saves the output as "flame-flicker-9x16.webm". Note that the output file format is changed to .webm since VP9 is not typically used with .mp4 containers.
+- Our LED matrix is only 9 pixels by 16 pixels so we need to resize the video to have tiny dimensions of 9x16. The following command takes the input file "flame-flicker-rotated.mp4", applies the scale filter with the specified dimensions (9x16 pixels), sets the video codec to libvpx-vp9, specifies a bitrate of 1M, sets the Constant Rate Factor (CRF) to 31 for quality, uses 4 threads for encoding, and saves the output as "flame-flicker-9x16.webm". Note that the output file format is changed to .webm since VP9 is not typically used with .mp4 containers.
 
 
 ```
@@ -83,16 +83,16 @@ ffmpeg -i flame-flicker-rotated.mp4 -vf "scale=9:16" -c:v libvpx-vp9 -b:v 1M -cr
 ```
 
 
-- Convert video to pngs (30 frames/second). This command takes the input file "flame-flicker-9x16.webm", applies the fps filter to specify 30 frames per second, and saves the output as a series of PNG images with the naming pattern "flicker-frame-001.png", "flicker-frame-002.png", and so on. The %03d in the output file name is a placeholder for the frame number, which will be zero-padded to 3 digits (e.g., 001, 002, 003, etc.).
+- Convert video to pngs (30 frames/second). The following command takes the input file "flame-flicker-9x16.webm", applies the fps filter to specify 30 frames per second, and saves the output as a series of PNG images with the naming pattern "flicker-frame-001.png", "flicker-frame-002.png", and so on. The %03d in the output file name is a placeholder for the frame number, which will be zero-padded to 3 digits (e.g., 001, 002, 003, etc.).
 
 ```
  ffmpeg -i flame-flicker-9x16.webm -vf fps=30 flicker-frame-%03d.png
 ```
 
 
-- Move the tiny pngs into the folder flame-flicker-source-pngs.
+- Move the tiny pngs into the folder **flame-flicker-source-pngs**.
 
-- Navigate into the flame-normal folder then run the following python script to generate an `h` file. If you see a file called `data-flame-flicker.h` in the folder, the script worked.
+- Navigate into the **flame-flicker-source-pngs** folder then run the following python script to generate an `h` file. After you've run the script, if you see a file called `data-flame-flicker.h` in the folder, the script worked.
 
 ```
 python3 convert-flicker-flicker.py *.png > data-flame-flicker.h
@@ -101,12 +101,13 @@ python3 convert-flicker-flicker.py *.png > data-flame-flicker.h
 - Move the `h` file `data-flame-flicker.h` into the root of the project folder: led-candle.
 
 
-- Repeat steps 6 through 11 for the normal video flame-normal-source.mp4. Here are all the comands with flicker replaced with normal:
+- Repeat the above steps for the normal video **flame-normal-source.mp4**. Here are all the comands with _flicker_ replaced with _normal_:
 
 ```
-ffmpeg -i flame-normal-source.mp4 -vf "format=gray,transpose=2,transpose=2" flame-normal-grayscale-rotate.mp4
-ffmpeg -i flame-normal-grayscale-rotate.mp4 -vf "scale=w=9:h=16:force_original_aspect_ratio=decrease,pad=9:16:(ow-iw)/2:(oh-ih)/2:color=black:shortest=1" -aspect 9:16 flame-normal-resized.mp4
-ffmpeg -i flame-normal-resized.mp4 -r 30/1 flame-normal%03d.png
+ffmpeg -i "flame-flicker-source.mp4" -vf "format=gray" "flame-flicker-grayscale.mp4"
+ffmpeg -i flame-flicker-grayscale.mp4 -vf "transpose=2,transpose=2" flame-flicker-rotated.mp4
+ffmpeg -i flame-flicker-rotated.mp4 -vf "scale=9:16" -c:v libvpx-vp9 -b:v 1M -crf 31 -threads 4 flame-flicker-9x16.webm
+ffmpeg -i flame-flicker-9x16.webm -vf fps=30 flicker-frame-%03d.png
 ```
 
 ```
