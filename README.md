@@ -114,7 +114,7 @@ ffmpeg -i flame-normal-grayscale.mp4 -vf "transpose=2,transpose=2" flame-normal-
 ffmpeg -i flame-normal-rotated.mp4 -vf scale=10:16 flame-normal-10x16.mp4 
 ```
 ```
-ffmpeg -i flame-normal-10x16.mp4 -vf fps=30 normal-frame-%03d.png
+ffmpeg -i flame-normal-10x16.mp4 -vf "fps=30,scale=9:16" normal-frame-%03d.png
 ```
 
 - Move the tiny pngs into the folder **flame-normal-source-pngs**.
