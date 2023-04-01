@@ -110,10 +110,14 @@ ffmpeg -i flame-flicker-rotated.mp4 -vf "scale=9:16" -c:v libvpx-vp9 -b:v 1M -cr
 ffmpeg -i flame-flicker-9x16.webm -vf fps=30 flicker-frame-%03d.png
 ```
 
-```
-python3 convert-normal-flicker.py *.png > data-flame-normal.h
-```
+- Move the tiny pngs into the folder **flame-normal-source-pngs**.
 
+- Navigate into the **flame-normal-source-pngs** folder then run the following python script to generate an `h` file. After you've run the script, if you see a file called `data-flame-normal.h` in the folder, the script worked.
+
+```
+python3 convert-flame-normal.py *.png > data-flame-normal.h
+```
+- Move the `h` file `data-flame-flicker.h` into the root of the project folder: led-candle.
 
 - Confirm that the project folder contains the three files needed to upload to the Adafruit Pro Trinket: `led-candle.ino`, `data-flame-normal.h`, `data-flame-flicker.h`.
 
