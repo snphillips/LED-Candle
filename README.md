@@ -68,17 +68,22 @@ cd flame-flicker-source-mp4
 ```
 
 
-- Navigate into the **flame-flicker-source-pngs** folder then run the following python script to generate an `h` file. After you've run the script, if you see a file called `data-flame-flicker.h` in the folder, the script worked.
+- Navigate into the **flame-flicker-source-pngs** folder to confirm you see a bunch of PNGs that are 9x16.
 
 ```
 cd flame-flicker-source-pngs
+```
+
+- Run the following python script to generate an `h` file. After you've run the script, confirm you see a file called `data-flame-flicker.h` in the folder.
+
+```
 python3 convert-flame-flicker.py *.png > data-flame-flicker.h
 ```
 
 - Move the `h` file `data-flame-flicker.h` into the root of the project folder: led-candle.
 
 
-- Repeat the above steps for the normal video **flame-normal-source.mp4** :
+- Repeat the above steps for the normal video **flame-normal-source.mp4**.
 
 ```
  ffmpeg -i flame-flicker-source.mp4 -vf "fps=30,scale=9:16" flame-flicker-source-pngs/flicker-frame_%03d.png
