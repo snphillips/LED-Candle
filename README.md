@@ -93,6 +93,8 @@ python3 convert-flame-flicker.py *.png > data-flame-flicker.h
 
 ```
 cd flame-normal-source-pngs
+```
+```
 python3 convert-flame-normal.py *.png > data-flame-normal.h
 ```
 - Move the `h` file `data-flame-flicker.h` into the root of the project folder: led-candle.
