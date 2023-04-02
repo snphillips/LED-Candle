@@ -86,7 +86,7 @@ python3 convert-flame-flicker.py *.png > data-flame-flicker.h
 - Repeat the above steps for the normal video **flame-normal-source.mp4**.
 
 ```
- ffmpeg -i flame-flicker-source.mp4 -vf "fps=30,scale=9:16" flame-flicker-source-pngs/flicker-frame_%03d.png
+ ffmpeg -i flame-normal-source.mp4 -vf "fps=30,scale=9:16" flame-normal-source-pngs/normal-frame_%03d.png
 ```
 
 - Navigate into the **flame-normal-source-pngs** folder then run the following python script to generate an `h` file. After you've run the script, if you see a file called `data-flame-normal.h` in the folder, the script worked.
