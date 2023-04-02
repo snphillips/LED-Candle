@@ -53,75 +53,41 @@ You'll need [python](https://www.python.org/about/gettingstarted/) & [FFmpeg](ht
 - Export the two source videos you'd like to turn into animations. Use a low resolution as you'll eventually be resizing each frame to 9px x 16px.
 - Place each video in their own folders named **flame-normal-source-mp4** and **flame-flicker-source-mp4**
 - Name the normal flame video `flame-normal-source.mp4`, and name the flicker flame video `flame-flicker-source.mp4`
-- We're going to use `FFmpeg` to further edit the video more and create PNGs. 
-- We'll start by editing the flicker video. Navigate into the **flame-flicker-source-mp4** folder: 
+- We're going to use `FFmpeg` via the command line to create PNGs. 
+- We'll start with the flicker video. Navigate into the **flame-flicker-source-mp4** folder: 
 
 
 ```
 cd flame-flicker-source-mp4
 ```
 
-- Using the command line, use `FFmpeg` to make the video grayscale with the following command:
+- Convert the video to a suite of PNGs. Every second of video will generate 30 PNGs (30 frames/second). This command will extract frames at a rate of 30 FPS, resize them to 9x16 pixels, and save them as PNG files with a 3-digit frame number in the output directory. The %03d in the output file name is a placeholder for the frame number, which will be zero-padded to 3 digits (e.g., 001, 002, 003, etc.).
 
 ```
-ffmpeg -i "flame-flicker-source.mp4" -vf "format=gray" "flame-flicker-grayscale.mp4"
+ ffmpeg -i flame-flicker-source.mp4 -vf "fps=30,scale=9:16" flame-flicker-source-pngs/flicker-frame_%03d.png
 ```
 
-
-- Now we need to rotate the video so it's upside down so that it is oriented properly when the unit is assembled. This command takes the input file "flame-flicker-grayscale.mp4", applies the transpose filter twice (which rotates the video 90 degrees each time), resulting in a 180-degree rotation, and saves the output as "flame-flicker-rotated.mp4".
-
-
-```
-ffmpeg -i flame-flicker-grayscale.mp4 -vf "transpose=2,transpose=2" flame-flicker-rotated.mp4
-```
-
-
-- Our LED matrix is only 9 pixels by 16 pixels so we need to resize the video to have tiny dimensions of 10x16.
-
-
-```
-ffmpeg -i flame-flicker-rotated.mp4 -vf scale=10:16 flame-flicker-10x16.mp4 
-```
-
-
-- Convert the video to a suite of PNGs. Every second of video will generate 30 PNGs (30 frames/second). The following command takes the input file "flame-flicker-9x16.webm", applies the fps filter to specify 30 frames per second, and saves the output as a series of PNG images with the naming pattern "flicker-frame-001.png", "flicker-frame-002.png", and so on. The %03d in the output file name is a placeholder for the frame number, which will be zero-padded to 3 digits (e.g., 001, 002, 003, etc.).
-
-```
- ffmpeg -i flame-flicker-10x16.mp4 -vf "fps=30,scale=9:16" flicker-frame-%03d.png
-```
-
-
-- Move the tiny PNGs into the folder **flame-flicker-source-pngs**.
 
 - Navigate into the **flame-flicker-source-pngs** folder then run the following python script to generate an `h` file. After you've run the script, if you see a file called `data-flame-flicker.h` in the folder, the script worked.
 
 ```
+cd flame-flicker-source-pngs
 python3 convert-flame-flicker.py *.png > data-flame-flicker.h
 ```
 
 - Move the `h` file `data-flame-flicker.h` into the root of the project folder: led-candle.
 
 
-- Repeat the above steps for the normal video **flame-normal-source.mp4**. Here are all the comands with _flicker_ replaced with _normal_:
+- Repeat the above steps for the normal video **flame-normal-source.mp4** :
 
 ```
-ffmpeg -i "flame-normal-source.mp4" -vf "format=gray" "flame-normal-grayscale.mp4"
+ ffmpeg -i flame-flicker-source.mp4 -vf "fps=30,scale=9:16" flame-flicker-source-pngs/flicker-frame_%03d.png
 ```
-```
-ffmpeg -i flame-normal-grayscale.mp4 -vf "transpose=2,transpose=2" flame-normal-rotated.mp4
-```
-```
-ffmpeg -i flame-normal-rotated.mp4 -vf scale=10:16 flame-normal-10x16.mp4 
-```
-```
-ffmpeg -i flame-normal-10x16.mp4 -vf "fps=30,scale=9:16" normal-frame-%03d.png
-```
-
-- Move the tiny pngs into the folder **flame-normal-source-pngs**.
 
 - Navigate into the **flame-normal-source-pngs** folder then run the following python script to generate an `h` file. After you've run the script, if you see a file called `data-flame-normal.h` in the folder, the script worked.
 
 ```
+cd flame-normal-source-pngs
 python3 convert-flame-normal.py *.png > data-flame-normal.h
 ```
 - Move the `h` file `data-flame-flicker.h` into the root of the project folder: led-candle.
