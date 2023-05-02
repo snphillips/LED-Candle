@@ -2,7 +2,8 @@
 
 An arduino led candle that flickers when something goes near it. This project is inspired by My [New Flame](https://www.ingo-maurer.com/en/products/my-new-flame/) by Moritz Waldemeyer for Ingo Maurer. Technically, this project is adapted from Phillip Burgess/paintyourdragon's [Animated Flame Pendant](https://learn.adafruit.com/animated-flame-pendant).
 
-<video src="ttps://user-images.githubusercontent.com/36208853/235734782-392fa293-edab-47d8-b8b2-89ca9e333de9.mov" width="200">
+<video src="https://user-images.githubusercontent.com/36208853/235734782-392fa293-edab-47d8-b8b2-89ca9e333de9.mov" width="200">
+  ![]([https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png](https://user-images.githubusercontent.com/36208853/235734782-392fa293-edab-47d8-b8b2-89ca9e333de9.mov) | width=200)
 
 
 
