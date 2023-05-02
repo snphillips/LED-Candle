@@ -33,6 +33,51 @@ void pageSelect(uint8_t n) {
   Wire.endTransmission();
 }
 
+void runAnimation(const uint8_t *animationType) {
+    uint8_t  a, x1, y1, x2, y2, x, y;
+  // Display frame rendered on prior pass.  This is done at function start
+  // (rather than after rendering) to ensire more uniform animation timing.
+  pageSelect(0x0B);    // Function registers
+  writeRegister(0x01); // Picture Display reg
+  Wire.write(page);    // Page #
+  Wire.endTransmission();
+
+  page ^= 1; // Flip front/back buffer index
+
+  // Then render NEXT frame.  Start by getting bounding rect for new frame:
+  a = pgm_read_byte(ptr++);     // New frame X1/Y1
+  if(a >= 0x90) {               // EOD marker? (valid X1 never exceeds 8)
+    ptr = animationType;     // Reset animation data pointer to start
+    a   = pgm_read_byte(ptr++); // and take first value
+  }
+  x1 = a >> 4;                  // X1 = high 4 bits
+  y1 = a & 0x0F;                // Y1 = low 4 bits
+  a  = pgm_read_byte(ptr++);    // New frame X2/Y2
+  x2 = a >> 4;                  // X2 = high 4 bits
+  y2 = a & 0x0F;                // Y2 = low 4 bits
+
+  // Read rectangle of data from anim[] into portion of img[] buffer
+  for(x=x1; x<=x2; x++) { // Column-major
+    for(y=y1; y<=y2; y++) img[(x << 4) + y] = pgm_read_byte(ptr++);
+  }
+
+  // Write img[] to matrix (not actually displayed until next pass)
+  pageSelect(page);    // Select background buffer
+  writeRegister(0x24); // First byte of PWM data
+  uint8_t i = 0, byteCounter = 1;
+  for(uint8_t x=0; x<9; x++) {
+    for(uint8_t y=0; y<16; y++) {
+      Wire.write(img[i++]);      // Write each byte to matrix
+      if(++byteCounter >= 32) {  // Every 32 bytes...
+        Wire.endTransmission();  // end transmission and
+        writeRegister(0x24 + i); // start a new one (Wire lib limits)
+      }
+    }
+  }
+  Wire.endTransmission();
+}
+
+
 // SETUP FUNCTION - RUNS ONCE AT STARTUP -----------------------------------
 
 void setup() {
@@ -43,8 +88,6 @@ void setup() {
   // override the I2C speed settings after init...
   Wire.begin();                            // Initialize I2C
   Wire.setClock(400000);                   // 400 KHz I2C
-  // The TWSR/TWBR lines are AVR-specific and won't work on other MCUs.
-
   pageSelect(0x0B);                        // Access the Function Registers
   writeRegister(0);                        // Starting from first...
   for(i=0; i<13; i++) Wire.write(10 == i); // Clear all except Shutdown
@@ -64,19 +107,8 @@ void setup() {
     Wire.endTransmission();
   }
 
-  // Enable the watchdog timer, set to a ~32 ms interval (about 31 Hz)
-  // This provides a sufficiently steady time reference for animation,
-  // allows timer/counter peripherals to remain off (for power saving)
-  // and can power-down the chip after processing each frame.
-  SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
-  // Peripheral and sleep savings only amount to about 10 mA, but this
-  // may provide nearly an extra hour of run time before battery depletes.
-
-
-// **************************************
-// ******** TimeofFlight setup **********
-// **************************************
-    // Setup serial communication
+  //  TimeofFlight setup
+  // Setup serial communication
   Serial.begin(115200);
 
   // Setup I2C
@@ -95,15 +127,9 @@ void setup() {
   }
 
   ledmatrix.clear(); // Clear the LED matrix buffer
-// **************************************
-// **************************************
-
-
-
 }
 
 // LOOP FUNCTION - RUNS EVERY FRAME ----------------------------------------
-
 void loop() {
 
   VL53L0X_RangingMeasurementData_t measure;
@@ -113,110 +139,24 @@ void loop() {
     uint16_t distance = measure.RangeMilliMeter;
 
 
-    // #########################################
     // Distance is less than or equal to 30 cm
-    // insert animationFlicker
-    // #########################################
+    // Display animationFlicker
     if (distance <= 300) {
       digitalWrite(LED_BUILTIN, HIGH);   // Tiny red LED on for testing
-
+      
       if (animation == 0) {
         animation = 1;
         ptr = animationFlicker;
       }
-
-        uint8_t  a, x1, y1, x2, y2, x, y;
-        // Display frame rendered on prior pass.  This is done at function start
-        // (rather than after rendering) to ensire more uniform animation timing.
-        pageSelect(0x0B);    // Function registers
-        writeRegister(0x01); // Picture Display reg
-        Wire.write(page);    // Page #
-        Wire.endTransmission();
-
-        page ^= 1; // Flip front/back buffer index
-
-        // Then render NEXT frame.  Start by getting bounding rect for new frame:
-        a = pgm_read_byte(ptr++);     // New frame X1/Y1
-        if(a >= 0x90) {               // EOD marker? (valid X1 never exceeds 8)
-          ptr = animationFlicker;     // Reset animation data pointer to start
-          a   = pgm_read_byte(ptr++); // and take first value
-        }
-        x1 = a >> 4;                  // X1 = high 4 bits
-        y1 = a & 0x0F;                // Y1 = low 4 bits
-        a  = pgm_read_byte(ptr++);    // New frame X2/Y2
-        x2 = a >> 4;                  // X2 = high 4 bits
-        y2 = a & 0x0F;                // Y2 = low 4 bits
-
-        // Read rectangle of data from anim[] into portion of img[] buffer
-        for(x=x1; x<=x2; x++) { // Column-major
-          for(y=y1; y<=y2; y++) img[(x << 4) + y] = pgm_read_byte(ptr++);
-        }
-
-        // Write img[] to matrix (not actually displayed until next pass)
-        pageSelect(page);    // Select background buffer
-        writeRegister(0x24); // First byte of PWM data
-        uint8_t i = 0, byteCounter = 1;
-        for(uint8_t x=0; x<9; x++) {
-          for(uint8_t y=0; y<16; y++) {
-            Wire.write(img[i++]);      // Write each byte to matrix
-            if(++byteCounter >= 32) {  // Every 32 bytes...
-              Wire.endTransmission();  // end transmission and
-              writeRegister(0x24 + i); // start a new one (Wire lib limits)
-            }
-          }
-        }
-        Wire.endTransmission();
+      runAnimation(animationFlicker);
 
       
-    // #########################################
-    // insert animationNormal
     // Distance is more than 30 cm
-    // #########################################
+    // Display animationNormal
     } else {
       digitalWrite(LED_BUILTIN, LOW);   // Tiny red LED off for testing
-
-        animation = 0;
-        uint8_t  a, x1, y1, x2, y2, x, y;
-        // Display frame rendered on prior pass.  This is done at function start
-        // (rather than after rendering) to ensire more uniform animation timing.
-        pageSelect(0x0B);    // Function registers
-        writeRegister(0x01); // Picture Display reg
-        Wire.write(page);    // Page #
-        Wire.endTransmission();
-
-        page ^= 1; // Flip front/back buffer index
-
-        // Then render NEXT frame.  Start by getting bounding rect for new frame:
-        a = pgm_read_byte(ptr++);     // New frame X1/Y1
-        if(a >= 0x90) {               // EOD marker? (valid X1 never exceeds 8)
-          ptr = animationNormal;     // Reset animation data pointer to start
-          a   = pgm_read_byte(ptr++); // and take first value
-        }
-        x1 = a >> 4;                  // X1 = high 4 bits
-        y1 = a & 0x0F;                // Y1 = low 4 bits
-        a  = pgm_read_byte(ptr++);    // New frame X2/Y2
-        x2 = a >> 4;                  // X2 = high 4 bits
-        y2 = a & 0x0F;                // Y2 = low 4 bits
-
-        // Read rectangle of data from anim[] into portion of img[] buffer
-        for(x=x1; x<=x2; x++) { // Column-major
-          for(y=y1; y<=y2; y++) img[(x << 4) + y] = pgm_read_byte(ptr++);
-        }
-
-        // Write img[] to matrix (not actually displayed until next pass)
-        pageSelect(page);    // Select background buffer
-        writeRegister(0x24); // First byte of PWM data
-        uint8_t i = 0, byteCounter = 1;
-        for(uint8_t x=0; x<9; x++) {
-          for(uint8_t y=0; y<16; y++) {
-            Wire.write(img[i++]);      // Write each byte to matrix
-            if(++byteCounter >= 32) {  // Every 32 bytes...
-              Wire.endTransmission();  // end transmission and
-              writeRegister(0x24 + i); // start a new one (Wire lib limits)
-            }
-          }
-        }
-        Wire.endTransmission();
+      animation = 0;
+      runAnimation(animationNormal);
     }
   }
 

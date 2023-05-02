@@ -1,6 +1,6 @@
 # LED Proximity Sensing Flickering Candle
 
-An arduino led candle that flickers when something goes near it. This project is inspired by My [New Flame](https://www.ingo-maurer.com/en/products/my-new-flame/) by Moritz Waldemeyer for Ingo Maurer. Technically, this project is adapted from Phillip Burgess/paintyourdragon's [Animated Flame Pendant](https://learn.adafruit.com/animated-flame-pendant).
+An arduino led candle that flickers when something goes near it. This project is inspired by My [New Flame](https://www.ingo-maurer.com/en/products/my-new-flame/) by Moritz Waldemeyer for Ingo Maurer. Technically, this project is adapted from Phillip Burgess/paintyourdragon's [Animated Flame Pendant](https://learn.adafruit.com/animated-flame-pendant). Instead of
 
 ## Prerequisites
 
@@ -10,7 +10,7 @@ An arduino led candle that flickers when something goes near it. This project is
 - Have the parts listed in the Parts section below, plus wire, solder, flux & soldering iron
 - If you want to generate your own animations, have Python & FFmpeg installed on your computer (the leading multimedia framework): https://ffmpeg.org/
 
-## How to Install Software onto Pro Trinket
+## How to Install Software onto Adafruit ItsyBitsy MO Express
 
 First, install the [Arduino IDE](https://www.arduino.cc/en/software).
 
@@ -18,20 +18,21 @@ First, install the [Arduino IDE](https://www.arduino.cc/en/software).
 
 `git clone https://github.com/snphillips/led-candle.git`
 
-- Connect the Pro Trinket into your computer. The instructions below assume you connected it using USB.
+- Connect the Adafruit ItsyBitsy into your computer via USB (ensure it's a USB data cable).
 
 - Using the Arduino IDE, open `led-candle.ino`.
 
-- Select the Pro Trinket 5V/16MHz (USB) or Pro Trinket 3V/12MHz (USB) board (depending on which version you have) from the Tools->Board menu.
+- Select Adafruit ItsyBitsy MO Express from the Tools->Board menu.
   Next go into the Tools -> Programmer menu and select the USBtinyISP programmer.
 
-- Upload `led-candle.ino` to the Pro Trinket board by pressing the tiny button on the Pro Trinket. Within eight seconds, select Sketch > Upload Using Programmer. Wait until you see the message "Done uploading".
+- Upload `led-candle.ino` to the Adafruit ItsyBitsy MO Express board by pressing the tiny button on the Adafruit ItsyBitsy MO Express. Within eight seconds, select Sketch > Upload Using Programmer. Wait until you see the message "Done uploading".
   If your code uploaded successfully, at the end of the output message you'll see a paragraph like this:
 
-`Sketch uses 21632 bytes (75%) of program storage space. Maximum is 28672 bytes.
-Global variables use 506 bytes of dynamic memory.`
+`Verify successful
+Done in 3.607 seconds
+writeWord(addr=0xe000ed0c,value=0x5fa0004)`
 
-Nothing will happen yet, but now the code is on your Pro Trinket.
+Nothing will happen yet, but now the code is on your Adafruit ItsyBitsy MO Express.
 
 ## How to Assemble Hardware
 
@@ -44,7 +45,7 @@ This project requires two short animations. If you don't like mine you can make 
 You'll need [python](https://www.python.org/about/gettingstarted/) & [FFmpeg](https://ffmpeg.org/) installed on your computer.
 
 - Take two vertical videos with you phone then airdrop them it to your computer.
-- Edit the video to your liking. I use the mac's iMovie for this step. Remove the sound track, adjust contrast, make it greyscale, crop it. Keep in mind we have limited space on the small Pro Trinket. Your final animations can't be longer than about 15 seconds total.
+- Edit the video to your liking. I use the mac's iMovie for this step. Remove the sound track, adjust contrast, make it greyscale, crop it. Keep in mind we have limited space on the small Adafruit ItsyBitsy MO Express. Your final animations can't be longer than about 15 seconds total.
 - Export the two source videos you'd like to turn into animations. Use a low resolution as you'll eventually be resizing each frame to 9px x 16px.
 - Place each video in their own folders named **flame-normal-source-mp4** and **flame-flicker-source-mp4**
 - Name the normal flame video `flame-normal-source.mp4`, and name the flicker flame video `flame-flicker-source.mp4`
@@ -93,13 +94,13 @@ python3 convert-flame-normal.py *.png > animationNormal.h
 
 - Move the `h` file `animationFlicker.h` into the root of the project folder: led-candle.
 
-- Confirm that the project folder contains the three files needed to upload to the Adafruit Pro Trinket: `led-candle.ino`, `animationNormal.h`, `animationFlicker.h`.
+- Confirm that the project folder contains the three files needed to upload to the Adafruit Adafruit ItsyBitsy MO Express: `led-candle.ino`, `animationNormal.h`, `animationFlicker.h`.
 
-- Connect the Pro Trinket into your computer. The instructions below assume you connected it using USB.
+- Connect the Adafruit ItsyBitsy MO Express into your computer. The instructions below assume you connected it using USB.
 
 - Using the Arduino IDE, open `led-candle.ino`.
 
-- Upload `led-candle.ino`, `animationNormal.h` & `animationFlicker.h` to the Pro Trinket board by pressing the tiny button on the Pro Trinket. Within eight seconds, select Sketch > Upload Using Programmer. Wait until you see the message "Done uploading".
+- Upload `led-candle.ino`, `animationNormal.h` & `animationFlicker.h` to the Adafruit ItsyBitsy MO Express board by pressing the tiny button on the Adafruit ItsyBitsy MO Express. Within eight seconds, select Sketch > Upload Using Programmer. Wait until you see the message "Done uploading".
 
 ## Parts
 
