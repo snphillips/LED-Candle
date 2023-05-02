@@ -1,7 +1,7 @@
 # LED Proximity Sensing Flickering Candle
 
 |               |               |
-| ------------- |:-------------:|
+|               |               |
 | <video src='https://user-images.githubusercontent.com/36208853/235719087-a2d87fac-6a15-49a1-ad18-5d63f346ae3d.mov' width=250/>      | An arduino led candle that flickers when something goes near it. This project is inspired by My [New Flame](https://www.ingo-maurer.com/en/products/my-new-flame/) by Moritz Waldemeyer for Ingo Maurer. Technically, this project is adapted from Phillip Burgess/paintyourdragon's [Animated Flame Pendant](https://learn.adafruit.com/animated-flame-pendant). |
 
 
