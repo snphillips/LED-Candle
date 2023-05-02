@@ -67,13 +67,13 @@ cd flame-flicker-source-mp4
 cd flame-flicker-source-pngs
 ```
 
-- Run the following python script to generate an `h` file. After you've run the script, confirm you see a file called `data-flame-flicker.h` in the folder.
+- Run the following python script to generate an `h` file. After you've run the script, confirm you see a file called `animationFlicker.h` in the folder.
 
 ```
-python3 convert-flame-flicker.py *.png > data-flame-flicker.h
+python3 convert-flame-flicker.py *.png > animationFlicker.h
 ```
 
-- Move the `h` file `data-flame-flicker.h` into the root of the project folder: led-candle.
+- Move the `h` file `animationFlicker.h` into the root of the project folder: led-candle.
 
 - Repeat the above steps for the normal video **flame-normal-source.mp4**.
 
@@ -81,25 +81,25 @@ python3 convert-flame-flicker.py *.png > data-flame-flicker.h
  ffmpeg -i flame-normal-source.mp4 -vf "fps=30,scale=9:16" flame-normal-source-pngs/normal-frame_%03d.png
 ```
 
-- Navigate into the **flame-normal-source-pngs** folder then run the following python script to generate an `h` file. After you've run the script, if you see a file called `data-flame-normal.h` in the folder, the script worked.
+- Navigate into the **flame-normal-source-pngs** folder then run the following python script to generate an `h` file. After you've run the script, if you see a file called `animationNormal.h` in the folder, the script worked.
 
 ```
 cd flame-normal-source-pngs
 ```
 
 ```
-python3 convert-flame-normal.py *.png > data-flame-normal.h
+python3 convert-flame-normal.py *.png > animationNormal.h
 ```
 
-- Move the `h` file `data-flame-flicker.h` into the root of the project folder: led-candle.
+- Move the `h` file `animationFlicker.h` into the root of the project folder: led-candle.
 
-- Confirm that the project folder contains the three files needed to upload to the Adafruit Pro Trinket: `led-candle.ino`, `data-flame-normal.h`, `data-flame-flicker.h`.
+- Confirm that the project folder contains the three files needed to upload to the Adafruit Pro Trinket: `led-candle.ino`, `animationNormal.h`, `animationFlicker.h`.
 
 - Connect the Pro Trinket into your computer. The instructions below assume you connected it using USB.
 
 - Using the Arduino IDE, open `led-candle.ino`.
 
-- Upload `led-candle.ino`, `data-flame-normal.h` & `data-flame-flicker.h` to the Pro Trinket board by pressing the tiny button on the Pro Trinket. Within eight seconds, select Sketch > Upload Using Programmer. Wait until you see the message "Done uploading".
+- Upload `led-candle.ino`, `animationNormal.h` & `animationFlicker.h` to the Pro Trinket board by pressing the tiny button on the Pro Trinket. Within eight seconds, select Sketch > Upload Using Programmer. Wait until you see the message "Done uploading".
 
 ## Parts
 
