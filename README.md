@@ -1,6 +1,6 @@
 # LED Proximity Sensing Flickering Candle
 
-An arduino led candle that flickers when something goes near it. This project is inspired by My [New Flame](https://www.ingo-maurer.com/en/products/my-new-flame/) by Moritz Waldemeyer for Ingo Maurer. Technically, this project is adapted from Phillip Burgess/paintyourdragon's [Animated Flame Pendant](https://learn.adafruit.com/animated-flame-pendant). Instead of
+An arduino led candle that flickers when something goes near it. This project is inspired by My [New Flame](https://www.ingo-maurer.com/en/products/my-new-flame/) by Moritz Waldemeyer for Ingo Maurer. Technically, this project is adapted from Phillip Burgess/paintyourdragon's [Animated Flame Pendant](https://learn.adafruit.com/animated-flame-pendant).
 
 ## Prerequisites
 
@@ -10,7 +10,7 @@ An arduino led candle that flickers when something goes near it. This project is
 - Have the parts listed in the Parts section below, plus wire, solder, flux & soldering iron
 - If you want to generate your own animations, have Python & FFmpeg installed on your computer (the leading multimedia framework): https://ffmpeg.org/
 
-## How to Install Software onto Adafruit ItsyBitsy MO Express
+## How to Install Software onto the Adafruit ItsyBitsy
 
 First, install the [Arduino IDE](https://www.arduino.cc/en/software).
 
